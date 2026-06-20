@@ -1,11 +1,14 @@
-public class Paciente extends Pessoa {
-    private int idade;
-    private String telefone;
-    private String convenioNome;
+public class Paciente {
+    public String nome;
+    public String cpf;
+    public int idade;
+    public String telefone;
+    public String convenioNome;
     public boolean ativo;
 
     public Paciente(String nome, String cpf) {
-        super(nome, cpf);
+        this.nome = nome;
+        this.cpf = cpf;
         this.idade = 0;
         this.telefone = "";
         this.convenioNome = "";
@@ -13,13 +16,7 @@ public class Paciente extends Pessoa {
     }
 
     public Paciente(String nome, String cpf, int idade, String telefone) {
-        super(nome, cpf);
-        this.idade = idade;
-        this.telefone = telefone;
-        this.convenioNome = "";
-        this.ativo = true;
-    }
-    // construtor com todos os dados
+        this.nome = nome;
         this.cpf = cpf;
         this.idade = idade;
         this.telefone = telefone;
@@ -29,13 +26,8 @@ public class Paciente extends Pessoa {
 
     // construtor com todos os dados
     public Paciente(String nome, String cpf, int idade, String telefone, String convenioNome) {
-        super(nome, cpf);
-        this.idade = idade;
-        this.telefone = telefone;
-        this.convenioNome = convenioNome;
-        this.ativo = true;
-    }
-}
+        this.nome = nome;
+        this.cpf = cpf;
         this.idade = idade;
         this.telefone = telefone;
         this.convenioNome = convenioNome;
@@ -59,16 +51,12 @@ public class Paciente extends Pessoa {
         this.ativo = false;
     }
 
-    public String getConvenioNome() {
-        return convenioNome;
-    }
-
     public String exibirResumo() {
         String status = "Sim";
         if (!ativo) {
             status = "Nao";
         }
-        return "Nome: " + getNome() +" CPF: " + getCpf() + " | Idade: " + idade
+        return "Nome: " + nome + " | CPF: " + cpf + " | Idade: " + idade
                 + " | Tel: " + telefone + " | Convenio: " + convenioNome
                 + " | Ativo: " + status;
     }
