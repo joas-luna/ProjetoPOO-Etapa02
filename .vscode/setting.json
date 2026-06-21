@@ -1,0 +1,10 @@
+{
+    "files.autoSave": "afterDelay",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.colorTheme": "Dracula Theme",
+    "php.validate.executablePath": "C:\\\\xampp\\\\php\\\\php.exe",
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmDelete": false,
+    "explorer.compactFolders": false,
+    "git.confirmSync": false
+}

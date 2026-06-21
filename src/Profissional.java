@@ -6,6 +6,17 @@ public class Profissional extends Pessoa {
     private String[] diasDisponiveis;
     private int totalDias;
 
+    public Profissional(String nome, String especialidade) {
+        super(nome, "");
+        this.especialidade = especialidade;
+    }
+
+    public Profissional(String nome, String cpf, String especialidade, double valorConsulta) {
+        this(nome, cpf, especialidade);
+
+        this.valorConsulta = valorConsulta;
+    }
+
     // só nome, cpf e especialidade
     public Profissional(String nome, String cpf, String especialidade) {
         super(nome, cpf);

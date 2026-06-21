@@ -238,7 +238,7 @@ public class Main {
                 System.out.print("Dia " + (i+1) + ": ");
                 dias[i] = sc.nextLine();
             }
-            profissionais[totalProfissionais] = new Profissional(nome, esp, reg, valor, dias, qtd);
+            profissionais[totalProfissionais] = new Profissional(nome, "", esp, reg, valor, dias, qtd);
         }
         totalProfissionais++;
         System.out.println("Profissional cadastrado!");

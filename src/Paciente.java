@@ -19,23 +19,10 @@ public class Paciente extends Pessoa {
         this.convenioNome = "";
         this.ativo = true;
     }
-    // construtor com todos os dados
-        this.cpf = cpf;
-        this.idade = idade;
-        this.telefone = telefone;
-        this.convenioNome = "";
-        this.ativo = true;
-    }
 
     // construtor com todos os dados
     public Paciente(String nome, String cpf, int idade, String telefone, String convenioNome) {
         super(nome, cpf);
-        this.idade = idade;
-        this.telefone = telefone;
-        this.convenioNome = convenioNome;
-        this.ativo = true;
-    }
-}
         this.idade = idade;
         this.telefone = telefone;
         this.convenioNome = convenioNome;
