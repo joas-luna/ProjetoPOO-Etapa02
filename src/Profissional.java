@@ -1,56 +1,56 @@
-public class Profissional extends Pessoa {
+package src;public class Profissional extends Pessoa {
 
     private String especialidade;
     private String registroProfissional;
     private double valorConsulta;
-    private String[] diasDisponiveis;
+    private String[] diasDisponiveis = new String[7];
     private int totalDias;
-
-    public Profissional(String nome, String especialidade) {
-        super(nome, "");
+    
+    // só nome, cpf e especialidade
+    public Profissional(String nome, String cpf, String especialidade) {
+        super(nome, cpf);
+        
         this.especialidade = especialidade;
     }
-
+    
     public Profissional(String nome, String cpf, String especialidade, double valorConsulta) {
         this(nome, cpf, especialidade);
 
         this.valorConsulta = valorConsulta;
     }
 
-    // só nome, cpf e especialidade
-    public Profissional(String nome, String cpf, String especialidade) {
-        super(nome, cpf);
+    public Profissional(
+        String nome, 
+        String cpf,
+        String especialidade,
+        double valorConsulta,
+        String registroProfissional
+    ) 
+    {
+        this(nome, cpf, especialidade, valorConsulta);
 
-        this.especialidade = especialidade;
-        this.registroProfissional = "";
-        this.valorConsulta = 0;
-        this.diasDisponiveis = new String[7];
-        this.totalDias = 0;
-    }
-
-    public Profissional(String nome, String cpf, String especialidade,
-                         String registroProfissional, double valorConsulta) {
-
-        super(nome, cpf);
-
-        this.especialidade = especialidade;
         this.registroProfissional = registroProfissional;
-        this.valorConsulta = valorConsulta;
-        this.diasDisponiveis = new String[7];
-        this.totalDias = 0;
     }
 
     // construtor completo com dias
-    public Profissional(String nome, String cpf, String especialidade,
-                         String registroProfissional, double valorConsulta,
-                         String[] dias, int totalDias) {
+    public Profissional(
+        String nome, 
+        String cpf, 
+        String especialidade,
+        double valorConsulta,
+        String registroProfissional, 
+        String[] dias, 
+        int totalDias
+    ) 
+    {
+        this(
+            nome, 
+            cpf, 
+            especialidade, 
+            valorConsulta, 
+            registroProfissional
+        );
 
-        super(nome, cpf);
-
-        this.especialidade = especialidade;
-        this.registroProfissional = registroProfissional;
-        this.valorConsulta = valorConsulta;
-        this.diasDisponiveis = new String[7];
         this.totalDias = totalDias;
 
         for (int i = 0; i < totalDias; i++) {

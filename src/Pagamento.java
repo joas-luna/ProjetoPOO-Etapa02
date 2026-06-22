@@ -1,21 +1,18 @@
-public class Pagamento {
+package src;public class Pagamento {
     public int indiceConsulta;
     public double valorFinal;
     public String tipoPagamento;
-    public int parcelas;
+    public int parcelas = 1;
 
     public Pagamento(int indiceConsulta, double valorFinal, String tipoPagamento) {
         this.indiceConsulta = indiceConsulta;
         this.valorFinal = valorFinal;
         this.tipoPagamento = tipoPagamento;
-        this.parcelas = 1;
     }
 
     // com parcelas (so pra cartao)
     public Pagamento(int indiceConsulta, double valorFinal, String tipoPagamento, int parcelas) {
-        this.indiceConsulta = indiceConsulta;
-        this.valorFinal = valorFinal;
-        this.tipoPagamento = tipoPagamento;
+        this(indiceConsulta, valorFinal, tipoPagamento);
         this.parcelas = parcelas;
     }
 
@@ -36,12 +33,7 @@ public class Pagamento {
 
     // com desconto e multa somada
     public static double calcularValor(double valorBase, double percentualDesconto, double multa) {
-        double desconto = valorBase * percentualDesconto / 100;
-        double valor = valorBase - desconto + multa;
-        if (valor < 0) {
-            valor = 0;
-        }
-        return valor;
+        return calcularValor(valorBase, percentualDesconto) + multa;
     }
 
     public String exibirResumo() {

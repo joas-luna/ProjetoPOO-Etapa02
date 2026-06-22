@@ -1,3 +1,5 @@
+package src;
+
 public class Fisioterapeuta extends Profissional {
 
     public Fisioterapeuta(
@@ -6,7 +8,7 @@ public class Fisioterapeuta extends Profissional {
             String registro,
             double valorConsulta) {
 
-        super(nome, cpf, registro, valorConsulta);
+        super(nome, cpf, "Fisioterapeuta", valorConsulta, registro);
     }
 
     @Override

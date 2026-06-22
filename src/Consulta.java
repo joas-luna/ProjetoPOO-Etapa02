@@ -1,10 +1,10 @@
-public class Consulta {
+package src;public class Consulta {
     public String cpfPaciente;
     public String nomeProfissional;
     public String data;
     public String horario;
-    public String tipo;
-    public String status;
+    public String tipo = "inicial";
+    public String status = "agendada";
 
     // sem tipo - assume inicial
     public Consulta(String cpfPaciente, String nomeProfissional, String data, String horario) {
@@ -12,27 +12,31 @@ public class Consulta {
         this.nomeProfissional = nomeProfissional;
         this.data = data;
         this.horario = horario;
-        this.tipo = "inicial";
-        this.status = "agendada";
     }
 
-    public Consulta(String cpfPaciente, String nomeProfissional, String data, String horario, String tipo) {
-        this.cpfPaciente = cpfPaciente;
-        this.nomeProfissional = nomeProfissional;
-        this.data = data;
-        this.horario = horario;
+    public Consulta(
+        String cpfPaciente, 
+        String nomeProfissional, 
+        String data, 
+        String horario, 
+        String tipo
+    ) 
+    {
+        this(cpfPaciente, nomeProfissional, data, horario);
         this.tipo = tipo;
-        this.status = "agendada";
     }
 
     // esse aqui a gente usa na remarcacao pra poder setar o status direto
-    public Consulta(String cpfPaciente, String nomeProfissional, String data,
-                    String horario, String tipo, String status) {
-        this.cpfPaciente = cpfPaciente;
-        this.nomeProfissional = nomeProfissional;
-        this.data = data;
-        this.horario = horario;
-        this.tipo = tipo;
+    public Consulta(
+        String cpfPaciente, 
+        String nomeProfissional, 
+        String data,
+        String horario, 
+        String tipo, 
+        String status
+    ) 
+    {
+        this(cpfPaciente, nomeProfissional, data, horario, tipo);
         this.status = status;
     }
 

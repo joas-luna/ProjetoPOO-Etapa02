@@ -1,32 +1,24 @@
+package src;
 public class Paciente extends Pessoa {
-    private int idade;
-    private String telefone;
-    private String convenioNome;
-    public boolean ativo;
+    private int idade = 0;
+    private String telefone = "";
+    private String convenioNome = "";
+    public boolean ativo = false;
 
     public Paciente(String nome, String cpf) {
         super(nome, cpf);
-        this.idade = 0;
-        this.telefone = "";
-        this.convenioNome = "";
-        this.ativo = true;
     }
 
     public Paciente(String nome, String cpf, int idade, String telefone) {
         super(nome, cpf);
         this.idade = idade;
         this.telefone = telefone;
-        this.convenioNome = "";
-        this.ativo = true;
     }
 
     // construtor com todos os dados
     public Paciente(String nome, String cpf, int idade, String telefone, String convenioNome) {
-        super(nome, cpf);
-        this.idade = idade;
-        this.telefone = telefone;
+        this(nome, cpf, idade, telefone);
         this.convenioNome = convenioNome;
-        this.ativo = true;
     }
 
     // atualiza so idade e telefone
@@ -37,13 +29,16 @@ public class Paciente extends Pessoa {
 
     // atualiza tudo incluindo convenio
     public void complementar(int idade, String telefone, String convenioNome) {
-        this.idade = idade;
-        this.telefone = telefone;
+        complementar(idade, telefone);
         this.convenioNome = convenioNome;
     }
 
     public void desativar() {
         this.ativo = false;
+    }
+
+    public void ativar() {
+        this.ativo = true;
     }
 
     public String getConvenioNome() {

@@ -1,3 +1,5 @@
+package src;
+
 public class Nutricionista extends Profissional {
 
     public Nutricionista(
@@ -6,7 +8,7 @@ public class Nutricionista extends Profissional {
             String registro,
             double valorConsulta) {
 
-        super(nome, cpf, registro, valorConsulta);
+        super(nome, cpf, "Nutricionista", valorConsulta, registro);
     }
 
     @Override

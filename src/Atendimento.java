@@ -1,35 +1,35 @@
-public class Atendimento {
+package src;public class Atendimento {
     public int indiceConsulta;
     public String observacoes;
-    public String diagnostico;
-    public String[] procedimentos;
-    public int totalProcedimentos;
+    public String diagnostico = "";
+    public String[] procedimentos = new String[10];
+    public int totalProcedimentos = 0;
 
     // registro basico - so observacoes
     public Atendimento(int indiceConsulta, String observacoes) {
         this.indiceConsulta = indiceConsulta;
         this.observacoes = observacoes;
-        this.diagnostico = "";
-        this.procedimentos = new String[10];
-        this.totalProcedimentos = 0;
     }
 
     public Atendimento(int indiceConsulta, String observacoes, String diagnostico) {
-        this.indiceConsulta = indiceConsulta;
-        this.observacoes = observacoes;
+        this(indiceConsulta, observacoes);
+
         this.diagnostico = diagnostico;
-        this.procedimentos = new String[10];
-        this.totalProcedimentos = 0;
     }
 
     // registro completo com procedimentos ja definidos
-    public Atendimento(int indiceConsulta, String observacoes, String diagnostico,
-                       String[] procedimentos, int totalProcedimentos) {
-        this.indiceConsulta = indiceConsulta;
-        this.observacoes = observacoes;
-        this.diagnostico = diagnostico;
-        this.procedimentos = new String[10];
+    public Atendimento(
+        int indiceConsulta, 
+        String observacoes, 
+        String diagnostico,
+        String[] procedimentos, 
+        int totalProcedimentos
+    ) 
+    {
+        this(indiceConsulta, observacoes, diagnostico);
+
         this.totalProcedimentos = totalProcedimentos;
+        
         for (int i = 0; i < totalProcedimentos; i++) {
             this.procedimentos[i] = procedimentos[i];
         }

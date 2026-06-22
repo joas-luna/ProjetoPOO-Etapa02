@@ -1,4 +1,7 @@
-import java.util.Scanner;
+package src;import java.util.Scanner;
+
+
+
 
 public class Main {
     static Paciente[] pacientes = new Paciente[100];
@@ -219,7 +222,7 @@ public class Main {
         int tipo = Integer.parseInt(sc.nextLine());
 
         if (tipo == 1) {
-            profissionais[totalProfissionais] = new Profissional(nome, esp);
+            profissionais[totalProfissionais] = new Profissional(nome, "", esp);
         } else if (tipo == 2) {
             System.out.print("Registro: ");
             String reg = sc.nextLine();
@@ -238,7 +241,7 @@ public class Main {
                 System.out.print("Dia " + (i+1) + ": ");
                 dias[i] = sc.nextLine();
             }
-            profissionais[totalProfissionais] = new Profissional(nome, "", esp, reg, valor, dias, qtd);
+            profissionais[totalProfissionais] = new Profissional(nome, "", esp, valor, reg, dias, qtd);
         }
         totalProfissionais++;
         System.out.println("Profissional cadastrado!");
