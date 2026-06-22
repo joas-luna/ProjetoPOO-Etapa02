@@ -1,4 +1,4 @@
-package src;public class Consulta {
+package src.processos;public class Consulta {
     public String cpfPaciente;
     public String nomeProfissional;
     public String data;

@@ -1,4 +1,4 @@
-package src;public class Profissional extends Pessoa {
+package src.entidades.abstratos;public class Profissional extends Pessoa {
 
     private String especialidade;
     private String registroProfissional;

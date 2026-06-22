@@ -1,5 +1,12 @@
 package src;import java.util.Scanner;
 
+import src.entidades.Paciente;
+import src.entidades.abstratos.Profissional;
+import src.processos.Atendimento;
+import src.processos.Consulta;
+import src.processos.Pagamento;
+import src.processos.Relatorio;
+
 
 
 

@@ -1,4 +1,7 @@
-package src;
+package src.entidades;
+
+import src.entidades.abstratos.Pessoa;
+
 public class Paciente extends Pessoa {
     private int idade = 0;
     private String telefone = "";

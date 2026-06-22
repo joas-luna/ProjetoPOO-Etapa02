@@ -1,4 +1,6 @@
-package src;
+package src.entidades.profissionais;
+
+import src.entidades.abstratos.Profissional;
 
 public class ClinicoGeral extends Profissional {
 

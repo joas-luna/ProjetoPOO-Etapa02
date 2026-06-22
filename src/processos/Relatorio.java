@@ -1,4 +1,4 @@
-package src;
+package src.processos;
 
 
 public class Relatorio {

@@ -1,4 +1,4 @@
-package src;public class Pagamento {
+package src.processos;public class Pagamento {
     public int indiceConsulta;
     public double valorFinal;
     public String tipoPagamento;
