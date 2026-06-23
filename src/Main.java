@@ -218,7 +218,7 @@ public class Main {
         System.out.print("Nome: ");
         String nome = sc.nextLine();
         System.out.print("Especialidade (clinica geral/fisioterapia/psicologia/nutricao): ");
-        String esp = sc.nextLine();
+        String esp = sc.nextLine().trim().toLowerCase();
 
         if (!Profissional.especialidadeValida(esp)) {
             System.out.println("Especialidade invalida!");
@@ -235,7 +235,7 @@ public class Main {
             String reg = sc.nextLine();
             System.out.print("Valor consulta: ");
             double valor = Double.parseDouble(sc.nextLine());
-            profissionais[totalProfissionais] = new Profissional(nome, esp, reg, valor);
+            profissionais[totalProfissionais] = new Profissional(nome, "", esp, valor, reg);
         } else {
             System.out.print("Registro: ");
             String reg = sc.nextLine();
@@ -243,6 +243,7 @@ public class Main {
             double valor = Double.parseDouble(sc.nextLine());
             System.out.print("Quantos dias atende? ");
             int qtd = Integer.parseInt(sc.nextLine());
+            if (qtd > 7) qtd = 7;
             String[] dias = new String[7];
             for (int i = 0; i < qtd; i++) {
                 System.out.print("Dia " + (i+1) + ": ");
@@ -301,7 +302,7 @@ public class Main {
         String esp = sc.nextLine();
         boolean achou = false;
         for (int i = 0; i < totalProfissionais; i++) {
-            if (profissionais[i].getEspecialidade().equals(esp)) {
+            if (profissionais[i].getEspecialidade().equalsIgnoreCase(esp)) {
                 System.out.println(profissionais[i].exibirResumo());
                 achou = true;
             }
@@ -559,6 +560,10 @@ public class Main {
 
         String nomeProf = consultas[idx].nomeProfissional;
         int idxProf = buscarIndiceProfissional(nomeProf);
+        if (idxProf == -1) {
+            System.out.println("Profissional associado nao encontrado.");
+            return;
+        }
 
         // se mudou de dia, verifica se prof atende
         if (tipo == 2) {

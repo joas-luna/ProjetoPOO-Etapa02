@@ -10,7 +10,7 @@ public class Nutricionista extends Profissional {
             String registro,
             double valorConsulta) {
 
-        super(nome, cpf, "Nutricionista", valorConsulta, registro);
+        super(nome, cpf, "nutricao", valorConsulta, registro);
     }
 
     @Override

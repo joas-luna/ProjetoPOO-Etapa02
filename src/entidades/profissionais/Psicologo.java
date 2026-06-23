@@ -10,7 +10,7 @@ public class Psicologo extends Profissional {
             String registro,
             double valorConsulta) {
 
-        super(nome, cpf, "Pscicólogo", valorConsulta, registro);
+        super(nome, cpf, "psicologia", valorConsulta, registro);
     }
 
     @Override

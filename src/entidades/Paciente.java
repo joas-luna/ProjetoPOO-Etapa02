@@ -6,7 +6,7 @@ public class Paciente extends Pessoa {
     private int idade = 0;
     private String telefone = "";
     private String convenioNome = "";
-    public boolean ativo = false;
+    public boolean ativo = true;
 
     public Paciente(String nome, String cpf) {
         super(nome, cpf);

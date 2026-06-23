@@ -10,7 +10,7 @@ public class ClinicoGeral extends Profissional {
             String registro,
             double valorConsulta) {
 
-        super(nome, cpf, "Clínico Geral", valorConsulta, registro);
+        super(nome, cpf, "clinica geral", valorConsulta, registro);
     }
 
     @Override
