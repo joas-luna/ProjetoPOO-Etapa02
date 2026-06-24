@@ -1,4 +1,7 @@
-package src.processos;public class Atendimento {
+package src.processos;
+
+
+public class Atendimento {
     public int indiceConsulta;
     public String observacoes;
     public String diagnostico = "";

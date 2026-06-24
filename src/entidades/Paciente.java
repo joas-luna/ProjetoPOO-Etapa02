@@ -2,9 +2,8 @@ package src.entidades;
 
 import src.entidades.abstratos.Pessoa;
 
+
 public class Paciente extends Pessoa {
-    private int idade = 0;
-    private String telefone = "";
     private String convenioNome = "";
     public boolean ativo = true;
 
@@ -12,27 +11,30 @@ public class Paciente extends Pessoa {
         super(nome, cpf);
     }
 
-    public Paciente(String nome, String cpf, int idade, String telefone) {
-        super(nome, cpf);
-        this.idade = idade;
-        this.telefone = telefone;
+    public Paciente(String nome, String cpf, String telefone) {
+        super(nome, cpf, telefone);
     }
 
     // construtor com todos os dados
-    public Paciente(String nome, String cpf, int idade, String telefone, String convenioNome) {
-        this(nome, cpf, idade, telefone);
+    public Paciente(String nome, String cpf, String telefone, String dataDeNascimento, String convenioNome) {
+        super(nome, cpf, telefone, dataDeNascimento);
         this.convenioNome = convenioNome;
     }
 
+    public Paciente(String nome, String cpf, String telefone, String dataDeNascimento, String convenioNome, boolean ativo) {
+        this(nome, cpf, telefone, dataDeNascimento, convenioNome);
+        this.ativo = ativo;
+    }
+
     // atualiza so idade e telefone
-    public void complementar(int idade, String telefone) {
-        this.idade = idade;
+    public void complementar(String dataDeNascimento, String telefone) {
+        this.dataDeNascimento = dataDeNascimento;
         this.telefone = telefone;
     }
 
     // atualiza tudo incluindo convenio
-    public void complementar(int idade, String telefone, String convenioNome) {
-        complementar(idade, telefone);
+    public void complementar(String dataDeNascimento, String telefone, String convenioNome) {
+        complementar(dataDeNascimento, telefone);
         this.convenioNome = convenioNome;
     }
 
@@ -53,7 +55,7 @@ public class Paciente extends Pessoa {
         if (!ativo) {
             status = "Nao";
         }
-        return "Nome: " + getNome() +" CPF: " + getCpf() + " | Idade: " + idade
+        return "Nome: " + getNome() +" CPF: " + getCpf() + " | Data de nascimento: " + dataDeNascimento
                 + " | Tel: " + telefone + " | Convenio: " + convenioNome
                 + " | Ativo: " + status;
     }
