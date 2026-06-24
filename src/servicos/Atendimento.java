@@ -1,12 +1,14 @@
-package src.processos;
+package src.servicos;
 
+import src.dtos.Prontuario;
 
 public class Atendimento {
-    public int indiceConsulta;
-    public String observacoes;
-    public String diagnostico = "";
-    public String[] procedimentos = new String[10];
-    public int totalProcedimentos = 0;
+    private int indiceConsulta;
+    private String observacoes;
+    private String diagnostico = "";
+    private String[] procedimentos = new String[10];
+    private int totalProcedimentos = 0;
+    private Prontuario prontuario;
 
     // registro basico - so observacoes
     public Atendimento(int indiceConsulta, String observacoes) {

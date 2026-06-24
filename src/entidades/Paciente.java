@@ -4,7 +4,7 @@ import src.entidades.abstratos.Pessoa;
 
 
 public class Paciente extends Pessoa {
-    private String convenioNome = "";
+    private Convenio convenio;
     public boolean ativo = true;
 
     public Paciente(String nome, String cpf) {
@@ -16,13 +16,13 @@ public class Paciente extends Pessoa {
     }
 
     // construtor com todos os dados
-    public Paciente(String nome, String cpf, String telefone, String dataDeNascimento, String convenioNome) {
+    public Paciente(String nome, String cpf, String telefone, String dataDeNascimento, Convenio convenio) {
         super(nome, cpf, telefone, dataDeNascimento);
-        this.convenioNome = convenioNome;
+        this.convenio = convenio;
     }
 
-    public Paciente(String nome, String cpf, String telefone, String dataDeNascimento, String convenioNome, boolean ativo) {
-        this(nome, cpf, telefone, dataDeNascimento, convenioNome);
+    public Paciente(String nome, String cpf, String telefone, String dataDeNascimento, Convenio convenio, boolean ativo) {
+        this(nome, cpf, telefone, dataDeNascimento, convenio);
         this.ativo = ativo;
     }
 
@@ -33,9 +33,9 @@ public class Paciente extends Pessoa {
     }
 
     // atualiza tudo incluindo convenio
-    public void complementar(String dataDeNascimento, String telefone, String convenioNome) {
+    public void complementar(String dataDeNascimento, String telefone, Convenio convenio) {
         complementar(dataDeNascimento, telefone);
-        this.convenioNome = convenioNome;
+        this.convenio = convenio;
     }
 
     public void desativar() {
@@ -46,8 +46,8 @@ public class Paciente extends Pessoa {
         this.ativo = true;
     }
 
-    public String getConvenioNome() {
-        return convenioNome;
+    public Convenio getConvenio() {
+        return convenio;
     }
 
     public String exibirResumo() {
@@ -56,7 +56,7 @@ public class Paciente extends Pessoa {
             status = "Nao";
         }
         return "Nome: " + getNome() +" CPF: " + getCpf() + " | Data de nascimento: " + dataDeNascimento
-                + " | Tel: " + telefone + " | Convenio: " + convenioNome
+                + " | Tel: " + telefone + " | Convenio: " + convenio
                 + " | Ativo: " + status;
     }
 }

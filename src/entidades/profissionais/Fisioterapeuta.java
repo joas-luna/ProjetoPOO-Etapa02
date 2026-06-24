@@ -3,6 +3,9 @@ package src.entidades.profissionais;
 import src.entidades.abstratos.Profissional;
 
 public class Fisioterapeuta extends Profissional {
+    @Override
+    public void registrarEspecifico() {
+    }
 
     public Fisioterapeuta(
             String nome,

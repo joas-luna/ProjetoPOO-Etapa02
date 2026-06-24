@@ -1,4 +1,4 @@
-package src.processos;
+package src.servicos;
 
 
 public class Consulta {

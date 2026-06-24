@@ -1,7 +1,7 @@
-package src.processos;
+package src.servicos.abstratos;
 
 
-public class Pagamento {
+public abstract class Pagamento {
     public int indiceConsulta;
     public double valorFinal;
     public String tipoPagamento;
@@ -50,4 +50,6 @@ public class Pagamento {
         }
         return resumo;
     }
+
+    public abstract Double calcularValorFinal();
 }

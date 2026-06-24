@@ -3,6 +3,9 @@ package src.entidades.profissionais;
 import src.entidades.abstratos.Profissional;
 
 public class Nutricionista extends Profissional {
+    @Override
+    public void registrarEspecifico() {
+    }
 
     public Nutricionista(
             String nome,

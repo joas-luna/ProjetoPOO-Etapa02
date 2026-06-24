@@ -1,5 +1,6 @@
 package src.entidades.abstratos;
 
+import src.dtos.HorarioDisponivel;
 
 public abstract class Profissional extends Pessoa {
 
@@ -8,6 +9,7 @@ public abstract class Profissional extends Pessoa {
     private double valorConsulta;
     private String[] diasDisponiveis = new String[7];
     private int totalDias;
+    private HorarioDisponivel horarioDisponivel;
     
     // só nome, cpf e especialidade
     public Profissional(String nome, String cpf, String especialidade) {
@@ -155,4 +157,6 @@ public abstract class Profissional extends Pessoa {
                 + " | Valor: R$" + valorConsulta
                 + " | Dias: " + dias;
     }
+
+    public abstract void registrarEspecifico();
 }
