@@ -1,9 +1,7 @@
-package src.entidades;
+package src.dtos;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import src.dtos.Cobertura;
 
 
 public class Convenio {

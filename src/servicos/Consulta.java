@@ -2,12 +2,12 @@ package src.servicos;
 
 
 public class Consulta {
-    public String cpfPaciente;
-    public String nomeProfissional;
-    public String data;
-    public String horario;
-    public String tipo = "inicial";
-    public String status = "agendada";
+    private String cpfPaciente;
+    private String nomeProfissional;
+    private String data;
+    private String horario;
+    private String tipo = "inicial";
+    private String status = "agendada";
 
     // sem tipo - assume inicial
     public Consulta(String cpfPaciente, String nomeProfissional, String data, String horario) {
@@ -43,6 +43,10 @@ public class Consulta {
         this.status = status;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
     public void cancelar() {
         this.status = "cancelada";
     }
@@ -59,6 +63,26 @@ public class Consulta {
 
     public void realizar() {
         this.status = "realizada";
+    }
+
+    public String getCPF() {
+        return cpfPaciente;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public String getHorario() {
+        return horario;
+    }
+
+    public String getNomeDoProfissional() {
+        return nomeProfissional;
+    }
+
+    public String getTipo() {
+        return tipo;
     }
 
     public String exibirResumo() {

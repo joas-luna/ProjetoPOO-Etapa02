@@ -1,5 +1,6 @@
 package src.entidades;
 
+import src.dtos.Convenio;
 import src.entidades.abstratos.Pessoa;
 
 
@@ -26,18 +27,6 @@ public class Paciente extends Pessoa {
         this.ativo = ativo;
     }
 
-    // atualiza so idade e telefone
-    public void complementar(String dataDeNascimento, String telefone) {
-        this.dataDeNascimento = dataDeNascimento;
-        this.telefone = telefone;
-    }
-
-    // atualiza tudo incluindo convenio
-    public void complementar(String dataDeNascimento, String telefone, Convenio convenio) {
-        complementar(dataDeNascimento, telefone);
-        this.convenio = convenio;
-    }
-
     public void desativar() {
         this.ativo = false;
     }
@@ -48,6 +37,12 @@ public class Paciente extends Pessoa {
 
     public Convenio getConvenio() {
         return convenio;
+    }
+
+    // atualiza tudo incluindo convenio
+    public void complementar(String dataDeNascimento, String telefone, Convenio convenio) {
+        complementar(dataDeNascimento, telefone);
+        this.convenio = convenio;
     }
 
     public String exibirResumo() {

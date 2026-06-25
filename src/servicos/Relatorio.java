@@ -71,12 +71,12 @@ public class Relatorio {
         double totalEmMultas = 0;
 
         for (int i = 0; i < totalConsultas; i++) {
-            if (consultas[i].status.equals("realizada")) realizadas++;
-            if (consultas[i].status.equals("cancelada")) canceladas++;
+            if (consultas[i].getStatus().equals("realizada")) realizadas++;
+            if (consultas[i].getStatus().equals("cancelada")) canceladas++;
         }
 
         for (int i = 0; i < totalPagamentos; i++) {
-            totalFaturado = totalFaturado + pagamentos[i].valorFinal;
+            totalFaturado = totalFaturado + pagamentos[i].getValorFinal();
         }
 
         for (int i = 0; i < totalMultas; i++) {

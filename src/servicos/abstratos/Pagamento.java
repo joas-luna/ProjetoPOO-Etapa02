@@ -2,10 +2,10 @@ package src.servicos.abstratos;
 
 
 public abstract class Pagamento {
-    public int indiceConsulta;
-    public double valorFinal;
-    public String tipoPagamento;
-    public int parcelas = 1;
+    private int indiceConsulta;
+    private double valorFinal;
+    private String tipoPagamento;
+    private int parcelas = 1;
 
     public Pagamento(int indiceConsulta, double valorFinal, String tipoPagamento) {
         this.indiceConsulta = indiceConsulta;
@@ -17,6 +17,10 @@ public abstract class Pagamento {
     public Pagamento(int indiceConsulta, double valorFinal, String tipoPagamento, int parcelas) {
         this(indiceConsulta, valorFinal, tipoPagamento);
         this.parcelas = parcelas;
+    }
+
+    public double getValorFinal() {
+        return valorFinal;
     }
 
     // sem desconto nenhum

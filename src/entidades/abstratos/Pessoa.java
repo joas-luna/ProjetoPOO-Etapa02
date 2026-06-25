@@ -2,10 +2,15 @@ package src.entidades.abstratos;
 
 
 public abstract class Pessoa {
-
-    protected String nome;
-    protected String cpf;
+    private String nome;
+    private String cpf;
+    /**
+     * Número de telefone pode ser acessado pelas subclasses.
+     */
     protected String telefone;
+    /**
+     * Data de nascimento pode ser acessado pelas subclasses.
+     */
     protected String dataDeNascimento;
 
     public Pessoa(String nome, String cpf) {
@@ -37,6 +42,12 @@ public abstract class Pessoa {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    // atualiza so idade e telefone
+    public void complementar(String dataDeNascimento, String telefone) {
+        this.dataDeNascimento = dataDeNascimento;
+        this.telefone = telefone;
     }
 
     public abstract String exibirResumo();

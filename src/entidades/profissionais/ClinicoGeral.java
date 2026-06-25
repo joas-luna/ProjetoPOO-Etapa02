@@ -3,13 +3,9 @@ package src.entidades.profissionais;
 import src.entidades.abstratos.Profissional;
 
 public class ClinicoGeral extends Profissional {
-    @Override
-    public void registrarEspecifico() {
-    }
-
     public ClinicoGeral(
-            String nome,
-            String cpf,
+        String nome,
+        String cpf,
             String registro,
             double valorConsulta) {
 
@@ -19,5 +15,9 @@ public class ClinicoGeral extends Profissional {
     @Override
     public String exibirResumo() {
         return "Clinico Geral: " + getNome();
+    }
+
+    @Override
+    public void registrarEspecifico() {
     }
 }
