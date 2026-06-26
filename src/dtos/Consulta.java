@@ -1,4 +1,4 @@
-package src.servicos;
+package src.dtos;
 
 
 public class Consulta {

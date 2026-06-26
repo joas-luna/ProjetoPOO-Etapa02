@@ -1,4 +1,4 @@
-package src.servicos;
+package src.dtos;
 
 import src.servicos.abstratos.Pagamento;
 import java.util.ArrayList;

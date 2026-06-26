@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
+import src.dtos.Consulta;
 import src.entidades.Paciente;
 import src.entidades.abstratos.Profissional;
 import src.servicos.Atendimento;
-import src.servicos.Consulta;
 import src.servicos.abstratos.Pagamento;     
 
 
