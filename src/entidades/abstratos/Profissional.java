@@ -2,12 +2,15 @@ package src.entidades.abstratos;
 
 import src.dtos.HorarioDisponivel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Profissional extends Pessoa {
 
     private String especialidade;
     private String registroProfissional;
     private double valorConsulta;
-    private String[] diasDisponiveis = new String[7];
+    private List<String> diasDisponiveis = new ArrayList<>();
     private int totalDias;
     private HorarioDisponivel horarioDisponivel;
     
@@ -44,7 +47,7 @@ public abstract class Profissional extends Pessoa {
         String especialidade,
         double valorConsulta,
         String registroProfissional, 
-        String[] dias, 
+        List<String> dias, 
         int totalDias
     ) 
     {
@@ -59,7 +62,7 @@ public abstract class Profissional extends Pessoa {
         this.totalDias = totalDias;
 
         for (int i = 0; i < totalDias; i++) {
-            this.diasDisponiveis[i] = dias[i];
+            this.diasDisponiveis.set(i, dias.get(i));
         }
     }
 
@@ -87,7 +90,7 @@ public abstract class Profissional extends Pessoa {
         this.valorConsulta = valorConsulta;
     }
 
-    public String[] getDiasDisponiveis() {
+    public List<String> getDiasDisponiveis() {
         return diasDisponiveis;
     }
 
@@ -101,14 +104,14 @@ public abstract class Profissional extends Pessoa {
     }
 
     public void atualizar(String registro, double valor,
-                          String[] dias, int totalDias) {
+                          List<String> dias, int totalDias) {
 
         this.registroProfissional = registro;
         this.valorConsulta = valor;
         this.totalDias = totalDias;
 
         for (int i = 0; i < totalDias; i++) {
-            this.diasDisponiveis[i] = dias[i];
+            this.diasDisponiveis.set(i, dias.get(i));
         }
     }
 
@@ -117,8 +120,8 @@ public abstract class Profissional extends Pessoa {
 
         for (int i = 0; i < totalDias; i++) {
 
-            if (diasDisponiveis[i] != null &&
-                diasDisponiveis[i].equalsIgnoreCase(dia)) {
+            if (diasDisponiveis.get(i) != null &&
+                diasDisponiveis.get(i).equalsIgnoreCase(dia)) {
 
                 return true;
             }
@@ -147,7 +150,7 @@ public abstract class Profissional extends Pessoa {
                 dias += ", ";
             }
 
-            dias += diasDisponiveis[i];
+            dias += diasDisponiveis.get(i);
         }
 
         return "Nome: " + getNome()

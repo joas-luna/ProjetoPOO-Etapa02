@@ -1,12 +1,15 @@
 package src.servicos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import src.dtos.Prontuario;
 
 public class Atendimento {
     private int indiceConsulta;
     private String observacoes;
     private String diagnostico = "";
-    private String[] procedimentos = new String[10];
+    private List<String> procedimentos = new ArrayList<>();
     private int totalProcedimentos = 0;
     private Prontuario prontuario;
 
@@ -27,7 +30,7 @@ public class Atendimento {
         int indiceConsulta, 
         String observacoes, 
         String diagnostico,
-        String[] procedimentos, 
+        List<String> procedimentos, 
         int totalProcedimentos
     ) 
     {
@@ -36,23 +39,23 @@ public class Atendimento {
         this.totalProcedimentos = totalProcedimentos;
         
         for (int i = 0; i < totalProcedimentos; i++) {
-            this.procedimentos[i] = procedimentos[i];
+            this.procedimentos.add(procedimentos.get(i));
         }
     }
 
     // adiciona um por vez
     public void adicionarProcedimento(String procedimento) {
         if (totalProcedimentos < 10) {
-            procedimentos[totalProcedimentos] = procedimento;
+            this.procedimentos.add(procedimento);
             totalProcedimentos++;
         }
     }
 
     // adiciona varios de uma vez
-    public void adicionarProcedimento(String[] procs, int quantidade) {
+    public void adicionarProcedimento(List<String> procs, int quantidade) {
         for (int i = 0; i < quantidade; i++) {
             if (totalProcedimentos < 10) {
-                procedimentos[totalProcedimentos] = procs[i];
+                this.procedimentos.add(procs.get(i));
                 totalProcedimentos++;
             }
         }
@@ -68,7 +71,7 @@ public class Atendimento {
         if (totalProcedimentos > 0) {
             resumo = resumo + "\nProcedimentos: ";
             for (int i = 0; i < totalProcedimentos; i++) {
-                resumo = resumo + procedimentos[i];
+                resumo = resumo + procedimentos.get(i);
                 if (i < totalProcedimentos - 1) {
                     resumo = resumo + ", ";
                 }
