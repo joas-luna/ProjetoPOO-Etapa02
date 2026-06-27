@@ -6,14 +6,15 @@ import java.util.List;
 import src.dtos.Prontuario;
 
 public class Atendimento {
+
     private int indiceConsulta;
     private String observacoes;
     private String diagnostico = "";
     private List<String> procedimentos = new ArrayList<>();
     private int totalProcedimentos = 0;
     private Prontuario prontuario;
+    private boolean finalizado = false;
 
-    // registro basico - so observacoes
     public Atendimento(int indiceConsulta, String observacoes) {
         this.indiceConsulta = indiceConsulta;
         this.observacoes = observacoes;
@@ -21,62 +22,128 @@ public class Atendimento {
 
     public Atendimento(int indiceConsulta, String observacoes, String diagnostico) {
         this(indiceConsulta, observacoes);
-
         this.diagnostico = diagnostico;
     }
 
-    // registro completo com procedimentos ja definidos
     public Atendimento(
-        int indiceConsulta, 
-        String observacoes, 
-        String diagnostico,
-        List<String> procedimentos, 
-        int totalProcedimentos
-    ) 
-    {
+            int indiceConsulta,
+            String observacoes,
+            String diagnostico,
+            List<String> procedimentos,
+            int totalProcedimentos) {
+
         this(indiceConsulta, observacoes, diagnostico);
 
         this.totalProcedimentos = totalProcedimentos;
-        
+
         for (int i = 0; i < totalProcedimentos; i++) {
             this.procedimentos.add(procedimentos.get(i));
         }
     }
 
-    // adiciona um por vez
-    public void adicionarProcedimento(String procedimento) {
-        if (totalProcedimentos < 10) {
-            this.procedimentos.add(procedimento);
-            totalProcedimentos++;
-        }
+    public int getIndiceConsulta() {
+        return indiceConsulta;
     }
 
-    // adiciona varios de uma vez
+    public String getObservacoes() {
+        return observacoes;
+    }
+
+    public String getDiagnostico() {
+        return diagnostico;
+    }
+
+    public List<String> getProcedimentos() {
+        return procedimentos;
+    }
+
+    public int getTotalProcedimentos() {
+        return totalProcedimentos;
+    }
+
+    public Prontuario getProntuario() {
+        return prontuario;
+    }
+
+    public boolean isFinalizado() {
+        return finalizado;
+    }
+
+    public void setObservacoes(String observacoes) {
+        this.observacoes = observacoes;
+    }
+
+    public void setDiagnostico(String diagnostico) {
+        this.diagnostico = diagnostico;
+    }
+
+    public void setProntuario(Prontuario prontuario) {
+        this.prontuario = prontuario;
+    }
+
+    public void adicionarProcedimento(String procedimento) {
+
+        if (totalProcedimentos < 10) {
+            procedimentos.add(procedimento);
+            totalProcedimentos++;
+        }
+
+    }
+
     public void adicionarProcedimento(List<String> procs, int quantidade) {
+
         for (int i = 0; i < quantidade; i++) {
+
             if (totalProcedimentos < 10) {
-                this.procedimentos.add(procs.get(i));
+                procedimentos.add(procs.get(i));
                 totalProcedimentos++;
             }
+
         }
+
+    }
+
+    public void finalizar() {
+        finalizado = true;
     }
 
     public String exibirResumo() {
-        String resumo = "Observacoes: " + observacoes;
+
+        String resumo = "";
+
+        resumo += "Consulta: " + indiceConsulta;
+        resumo += "\nObservacoes: " + observacoes;
 
         if (!diagnostico.equals("")) {
-            resumo = resumo + "\nDiagnostico: " + diagnostico;
+            resumo += "\nDiagnostico: " + diagnostico;
         }
 
         if (totalProcedimentos > 0) {
-            resumo = resumo + "\nProcedimentos: ";
+
+            resumo += "\nProcedimentos: ";
+
             for (int i = 0; i < totalProcedimentos; i++) {
-                resumo = resumo + procedimentos.get(i);
+
+                resumo += procedimentos.get(i);
+
                 if (i < totalProcedimentos - 1) {
-                    resumo = resumo + ", ";
+                    resumo += ", ";
                 }
+
             }
+
         }
+
+        resumo += "\nStatus: ";
+
+        if (finalizado) {
+            resumo += "Finalizado";
+        } else {
+            resumo += "Em andamento";
+        }
+
         return resumo;
+
     }
+
 }
