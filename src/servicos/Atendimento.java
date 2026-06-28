@@ -3,9 +3,10 @@ package src.servicos;
 import java.util.ArrayList;
 import java.util.List;
 
+import src.contratos.Atendivel;
 import src.dtos.Prontuario;
 
-public class Atendimento {
+public class Atendimento implements Atendivel {
 
     private int indiceConsulta;
     private String observacoes;
@@ -103,6 +104,12 @@ public class Atendimento {
 
     }
 
+    @Override
+    public void registrar() {
+        System.out.println("Atendimento registrado.");
+    }
+
+    @Override
     public void finalizar() {
         finalizado = true;
     }
@@ -112,10 +119,10 @@ public class Atendimento {
         String resumo = "";
 
         resumo += "Consulta: " + indiceConsulta;
-        resumo += "\nObservacoes: " + observacoes;
+        resumo += "\nObservações: " + observacoes;
 
         if (!diagnostico.equals("")) {
-            resumo += "\nDiagnostico: " + diagnostico;
+            resumo += "\nDiagnóstico: " + diagnostico;
         }
 
         if (totalProcedimentos > 0) {
@@ -132,6 +139,10 @@ public class Atendimento {
 
             }
 
+        }
+
+        if (prontuario != null) {
+            resumo += "\nProntuário registrado.";
         }
 
         resumo += "\nStatus: ";
