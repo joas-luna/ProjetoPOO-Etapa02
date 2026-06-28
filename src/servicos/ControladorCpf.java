@@ -1,4 +1,4 @@
-package src;
+package src.servicos;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,7 +48,6 @@ public class ControladorCpf {
         return cpfParaNome.get(cpf);
     }
 
-}
     // move o CPF para a lista de bloqueados sem remove-lo do sistema
     public void bloquear(String cpf) {
         if (!cpfsCadastrados.contains(cpf)) {
@@ -94,3 +93,54 @@ public class ControladorCpf {
 
         System.out.println("CPF " + cpf + " removido do sistema.");
     }
+
+    // retorna copia para nao expor o Set interno
+    public List<String> listarCadastrados() {
+        return new ArrayList<>(cpfsCadastrados);
+    }
+
+    // retorna copia do historico de bloqueios
+    public List<String> listarBloqueados() {
+        return new ArrayList<>(cpfsBloqueados);
+    }
+
+    // percorre o Map para exibir CPF + nome + status de cada titular
+    public void exibirTodos() {
+        if (cpfsCadastrados.isEmpty()) {
+            System.out.println("Nenhum CPF cadastrado.");
+            return;
+        }
+
+        System.out.println("\n--- CPFs Cadastrados ---");
+
+        for (Map.Entry<String, String> entrada : cpfParaNome.entrySet()) {
+            String cpf    = entrada.getKey();
+            String nome   = entrada.getValue();
+            String status = cpfsBloqueados.contains(cpf) ? "[BLOQUEADO]" : "[ATIVO]";
+            System.out.println("CPF: " + cpf + " | Nome: " + nome + " " + status);
+        }
+    }
+
+    // usa o ArrayList para mostrar bloqueios em ordem cronologica
+    public void exibirHistoricoBloqueios() {
+        if (cpfsBloqueados.isEmpty()) {
+            System.out.println("Nenhum CPF bloqueado ate o momento.");
+            return;
+        }
+
+        System.out.println("\n--- Historico de Bloqueios ---");
+
+        for (int i = 0; i < cpfsBloqueados.size(); i++) {
+            String cpf  = cpfsBloqueados.get(i);
+            String nome = cpfParaNome.get(cpf);
+            System.out.println((i + 1) + ". CPF: " + cpf + " | Nome: " + nome);
+        }
+    }
+
+    public void exibirResumo() {
+        System.out.println("\n--- Resumo ControladorCpf ---");
+        System.out.println("Total cadastrados : " + cpfsCadastrados.size());
+        System.out.println("Total bloqueados  : " + cpfsBloqueados.size());
+        System.out.println("Total ativos      : " + (cpfsCadastrados.size() - cpfsBloqueados.size()));
+    }
+}
