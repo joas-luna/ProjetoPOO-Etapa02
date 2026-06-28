@@ -30,6 +30,8 @@ public class Main {
     static List<Double> multas = new ArrayList<>();
     static int totalMultas = 0;
 
+    static ControladorCpf controladorCpf = new ControladorCpf();
+
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -180,6 +182,7 @@ public class Main {
             System.out.println("Paciente nao encontrado.");
         } else {
             pacientes.get(idx).desativar();
+            controladorCpf.bloquear(cpf);
             System.out.println("Paciente desativado.");
         }
     }
@@ -219,6 +222,8 @@ public class Main {
     // public static void cadastrarProfissional() {
     //     System.out.print("Nome: ");
     //     String nome = sc.nextLine();
+    //     System.out.print("CPF:  ");
+    //     String cpf = sc.nextline();
     //     System.out.print("Especialidade (clinica geral/fisioterapia/psicologia/nutricao): ");
     //     String esp = sc.nextLine().trim().toLowerCase();
     //
@@ -226,7 +231,12 @@ public class Main {
     //         System.out.println("Especialidade invalida!");
     //         return;
     //     }
-    // 
+    //
+    //     if (controladorCpf.existe(cpf)){
+    //     System.out.printIn("CPF ja cadastrado no sistema!");
+    //     return;
+    //     }
+
     //     System.out.print("Tipo (1-Minimo / 2-Com registro e valor / 3-Completo): ");
     //     int tipo = Integer.parseInt(sc.nextLine());
     // 
@@ -254,6 +264,9 @@ public class Main {
     //         profissionais[totalProfissionais] = new Profissional(nome, "", esp, valor, reg, dias, qtd);
     //     }
     //     totalProfissionais++;
+    //
+    //     controladorCpf.registrar(cpf, nome);
+    //
     //     System.out.println("Profissional cadastrado!");
     // }
 
@@ -356,6 +369,12 @@ public class Main {
             System.out.println("Paciente nao encontrado.");
             return;
         }
+
+        if (controladorCpf.estaBloqueado(cpf)) {
+            System.out.println("Paciente com CPF bloqueado. Nao e possivel agendar.");
+            return;
+        }
+
         if (!pacientes.get(idxPac).ativo) {
             System.out.println("Paciente inativo. Nao e possivel agendar.");
             return;
