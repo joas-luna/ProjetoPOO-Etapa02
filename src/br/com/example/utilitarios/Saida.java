@@ -7,8 +7,38 @@ public final class Saida {
 		throw new InstanciacaoException("Não pode instanciar Saida");
 	}
 
+	public static String tabulacoes(int quantidade) {
+		if(quantidade < 0) {
+			return "";
+		}
+
+		String tabulacoes = "";
+
+		for(int i = 0; i < quantidade; i++) tabulacoes += "\t";
+
+		return tabulacoes;
+	}
+
+	public static void campo(String message, String error, int tabulacoes) {
+		sobrescreverLinhaAtual(message + tabulacoes(tabulacoes) + vermelho(error));
+		coluna(message.length() + 1);
+	}
+
+	public static void campo(String error, int tabulacoes, int coluna) {
+		sobrescreverLinhaAtual(tabulacoes(tabulacoes) + vermelho(error));
+		coluna(coluna);
+	}
+
+	public static void sobrescreverLinhaAtual(String message) {
+		System.out.print("\r\u001B[2K");
+	}
+
 	public static String vermelho(String string) {
 		return "\u001B[31;1m" + string + "\u001B[m";
+	}
+
+	public static String roxo(String string) {
+		return "\u001B[34;1m" + string + "\u001B[m";
 	}
     
 	public static String verde(String string) {
