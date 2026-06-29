@@ -9,10 +9,11 @@ import br.com.example.dtos.Convenio;
 import br.com.example.entidades.Paciente;
 import br.com.example.entidades.abstratos.Profissional;
 import br.com.example.servicos.abstratos.Pagamento;
+import br.com.example.utilitarios.Entrada;
 import br.com.example.validadores.Data;
 
 public class ClinicaServico {
-    private static Scanner sc;
+    private static Scanner sc = Entrada.sc;
 
     private static List<Paciente> pacientes = new ArrayList<>();
     private static int totalPacientes = 0;

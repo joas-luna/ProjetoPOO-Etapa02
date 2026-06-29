@@ -48,4 +48,8 @@ public final class Saida {
 	public static void coluna(int coluna) {
 		System.out.printf("\u001B[%dG", coluna);
 	}
+
+	public static void limparTerminal() {
+		System.out.print("\u001B[H\u001B[2J\u001B[3J");
+	}
 }
