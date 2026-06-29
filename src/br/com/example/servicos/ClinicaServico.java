@@ -64,8 +64,14 @@ public class ClinicaServico {
             Saida.campo("CPF já cadastrado!", 3, 6);
         }
     
-        System.out.print("Tipo (1-Minimo / 2-Com idade e tel / 3-Completo): ");
-        int tipo = Integer.parseInt(Entrada.input());
+        int tipo = Integer.parseInt(Entrada.input(
+            """
+            Tipo 
+            | 1-Minimo
+            | 2-Com idade e tel
+            | 3-Completo
+            : """
+        ));
     
         switch(tipo) {
             case 1:
