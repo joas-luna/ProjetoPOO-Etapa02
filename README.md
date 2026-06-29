@@ -1,1 +1,142 @@
 # ProjetoPOO-Etapa02
+> __Para rodar o programa, é necessário executar so seguintes comandos na raiz do projeto usando terminal:__ 
+
+__Primeiro:__
+```
+javac -d class -sourcepath src src/br/com/example/Main.java
+```
+__E depois:__
+```
+java -cp class br.com.example.Main
+```
+
+# ESTRUTURA DO PROJETO
+```
+ProjetoPOO-Etapa02
+|   .gitignore
+|   arvore_prjt.tree
+|   README.md
+|   
++---.vscode
+|       extensions.json
+|       keybindings.json
+|       settings.json
+|       
++---class
+|   \---br
+|       \---com
+|           \---example
+|               |   Main.class
+|               |   
+|               +---contratos
+|               |       Atendivel.class
+|               |       
+|               +---dtos
+|               |       Cobertura.class
+|               |       Consulta.class
+|               |       Convenio.class
+|               |       Diagnostico.class
+|               |       HorarioDisponivel.class
+|               |       Prontuario.class
+|               |       
+|               +---entidades
+|               |   |   Paciente.class
+|               |   |   
+|               |   \---abstratos
+|               |           Pessoa.class
+|               |           Profissional.class
+|               |           
+|               +---excecoes
+|               |       InstanciacaoException.class
+|               |       
+|               +---servicos
+|               |   |   Atendimento.class
+|               |   |   ClinicaServico.class
+|               |   |   PagamentoDinheiro.class
+|               |   |   Relatorio.class
+|               |   |   
+|               |   \---abstratos
+|               |           Pagamento.class
+|               |           
+|               +---utilitarios
+|               |       Entrada.class
+|               |       Saida.class
+|               |       
+|               \---validadores
+|                       Data.class
+|                       
++---docs
+|       Projeto de Disciplina - Descrito Etapa AV2.pdf
+|       Projeto de Disciplina - Jornadas de Usuário.pdf
+|       Projeto de Disciplina - Roteiro de Refatoração.pdf
+|       
+\---src
+    \---br
+        \---com
+            \---example
+                |   Main.java
+                |   
+                +---contratos
+                |       Agendavel.java
+                |       Atendivel.java
+                |       Exportavel.java
+                |       
+                +---dtos
+                |       Cobertura.java
+                |       Consulta.java
+                |       Convenio.java
+                |       Diagnostico.java
+                |       HorarioDisponivel.java
+                |       Prontuario.java
+                |       
+                +---entidades
+                |   |   Paciente.java
+                |   |   
+                |   +---abstratos
+                |   |       Pessoa.java
+                |   |       Profissional.java
+                |   |       
+                |   \---profissionais
+                |           ClinicoGeral.java
+                |           Fisioterapeuta.java
+                |           Nutricionista.java
+                |           Psicologo.java
+                |           
+                +---excecoes
+                |       ConsultaNaoEncontradaException.java
+                |       ConvenioNaoCobreException.java
+                |       HorarioIndisponivelException.java
+                |       InstanciacaoException.java
+                |       OperacaoInvalidaException.java
+                |       PacienteInativoException.java
+                |       PacienteNaoEncontradoException.java
+                |       PagamentoInvalidoException.java
+                |       ProfissionalNaoEncontradoException.java
+                |       
+                +---servicos
+                |   |   AgendaServico.java
+                |   |   Atendimento.java
+                |   |   AtendimentoServico.java
+                |   |   ClinicaServico.java
+                |   |   ControladorCpf.java
+                |   |   PacienteServico.java
+                |   |   PagamentoCartao.java
+                |   |   PagamentoConvenio.java
+                |   |   PagamentoDinheiro.java
+                |   |   Relatorio.java
+                |   |   
+                |   \---abstratos
+                |           Pagamento.java
+                |           
+                +---utilitarios
+                |       Entrada.java
+                |       Saida.java
+                |       
+                \---validadores
+                        CPF.java
+                        Data.java
+                        Nome.java
+                        Telefone.java
+                        
+
+```
