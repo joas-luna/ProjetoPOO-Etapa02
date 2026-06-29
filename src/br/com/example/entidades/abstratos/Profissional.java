@@ -11,7 +11,7 @@ public abstract class Profissional extends Pessoa {
     private String registroProfissional;
     private double valorConsulta;
     private List<String> diasDisponiveis = new ArrayList<>();
-    private int totalDias;
+    private Integer totalDias;
     private HorarioDisponivel horarioDisponivel;
 
     public Profissional(String nome, String cpf, String especialidade) {
@@ -42,7 +42,7 @@ public abstract class Profissional extends Pessoa {
             double valorConsulta,
             String registroProfissional,
             List<String> dias,
-            int totalDias) {
+            Integer totalDias) {
 
         this(
                 nome,
@@ -86,7 +86,7 @@ public abstract class Profissional extends Pessoa {
         return diasDisponiveis;
     }
 
-    public int getTotalDias() {
+    public Integer getTotalDias() {
         return totalDias;
     }
 
@@ -104,7 +104,7 @@ public abstract class Profissional extends Pessoa {
     }
 
     public void atualizar(String registro, double valor,
-                          List<String> dias, int totalDias) {
+                          List<String> dias, Integer totalDias) {
 
         this.registroProfissional = registro;
         this.valorConsulta = valor;

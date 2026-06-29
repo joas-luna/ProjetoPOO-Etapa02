@@ -4,10 +4,10 @@ import br.com.example.servicos.abstratos.Pagamento;;
 
 
 public class PagamentoDinheiro extends Pagamento {
-    public PagamentoDinheiro(int indiceConsulta, double valorFinal, String tipoPagamento) {
+    public PagamentoDinheiro(Integer indiceConsulta, double valorFinal, String tipoPagamento) {
         super(indiceConsulta, valorFinal, tipoPagamento);
     }
-    public PagamentoDinheiro(int indiceConsulta, double valorFinal, String tipoPagamento, int parcelas) {
+    public PagamentoDinheiro(Integer indiceConsulta, double valorFinal, String tipoPagamento, Integer parcelas) {
         super(indiceConsulta, valorFinal, tipoPagamento, parcelas);
     }
 

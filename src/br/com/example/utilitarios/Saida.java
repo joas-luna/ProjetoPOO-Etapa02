@@ -7,24 +7,24 @@ public final class Saida {
 		throw new InstanciacaoException("Não pode instanciar Saida");
 	}
 
-	public static String tabulacoes(int quantidade) {
+	public static String tabulacoes(Integer quantidade) {
 		if(quantidade < 0) {
 			return "";
 		}
 
 		String tabulacoes = "";
 
-		for(int i = 0; i < quantidade; i++) tabulacoes += "\t";
+		for(Integer i = 0; i < quantidade; i++) tabulacoes += "\t";
 
 		return tabulacoes;
 	}
 
-	public static void campo(String message, String error, int tabulacoes) {
+	public static void campo(String message, String error, Integer tabulacoes) {
 		sobrescreverLinhaAtual(message + tabulacoes(tabulacoes) + vermelho(error));
 		coluna(message.length() + 1);
 	}
 
-	public static void campo(String error, int tabulacoes, int coluna) {
+	public static void campo(String error, Integer tabulacoes, Integer coluna) {
 		sobrescreverLinhaAtual(tabulacoes(tabulacoes) + vermelho(error));
 		coluna(coluna);
 	}
@@ -75,7 +75,7 @@ public final class Saida {
 		System.out.print("\u001B[K");
 	}
 
-	public static void coluna(int coluna) {
+	public static void coluna(Integer coluna) {
 		System.out.printf("\u001B[%dG", coluna);
 	}
 

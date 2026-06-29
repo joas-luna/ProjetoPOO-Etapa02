@@ -3,10 +3,10 @@ package br.com.example.servicos;
 import br.com.example.servicos.abstratos.Pagamento;
 
 public class PagamentoConvenio extends Pagamento {
-    public PagamentoConvenio(int indiceConsulta, double valorFinal, String tipoPagamento) {
+    public PagamentoConvenio(Integer indiceConsulta, double valorFinal, String tipoPagamento) {
         super(indiceConsulta, valorFinal, tipoPagamento);
     }
-    public PagamentoConvenio(int indiceConsulta, double valorFinal, String tipoPagamento, int parcelas) {
+    public PagamentoConvenio(Integer indiceConsulta, double valorFinal, String tipoPagamento, Integer parcelas) {
         super(indiceConsulta, valorFinal, tipoPagamento, parcelas);
     }
 

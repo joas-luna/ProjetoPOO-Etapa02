@@ -16,7 +16,7 @@ public final class Entrada {
 		return string.replace(" ", "");
 	}
 
-	public static boolean isInteger(String string) {
+	public static boolean isInteger (String string) {
 		return string.matches("^[+-]?\\d+$");
 	}
 
@@ -37,7 +37,23 @@ public final class Entrada {
 		}
 	}
 
-	public static String confirmar(String string, int coluna) {
+	public static Integer  integerInput() {
+		try {
+			return Integer .parseInt(input());
+		} catch(NumberFormatException e) {
+			return null;
+		}
+	}
+
+	public static Integer  integerInput(String message) {
+		try {
+			return Integer .parseInt(input(message));
+		} catch(NumberFormatException e) {
+			return null;
+		}
+	}
+
+	public static String confirmar(String string, Integer coluna) {
 		if(string.equals("")) {
 			Saida.linhaAnterior();
 			Saida.coluna(coluna);
@@ -50,7 +66,7 @@ public final class Entrada {
 		 return string;
 	}
 
-	public static String confirmar(String string, String message, int coluna) {
+	public static String confirmar(String string, String message, Integer coluna) {
 		if(string.equals("")) {
 			Saida.linhaAnterior();
 			Saida.coluna(coluna);
