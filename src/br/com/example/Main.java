@@ -37,7 +37,7 @@ public class Main {
             }
             
             try {
-                op = Integer .parseInt(opStr);
+                op = Integer.parseInt(opStr);
             } catch(NumberFormatException e) {
                 escolhaInvalida = true;
                 continue;
@@ -98,7 +98,7 @@ public class Main {
             }
 
             try {
-                op = Integer .parseInt(opStr);
+                op = Integer.parseInt(opStr);
             } catch(NumberFormatException e) {
                 escolhaInvalida = true;
                 continue;
@@ -145,7 +145,7 @@ public class Main {
             }
 
             try {
-                op = Integer .parseInt(opStr);
+                op = Integer.parseInt(opStr);
             } catch(NumberFormatException e) {
                 escolhaInvalida = true;
                 continue;
@@ -194,7 +194,7 @@ public class Main {
             }
 
             try {
-                op = Integer .parseInt(opStr);
+                op = Integer.parseInt(opStr);
             } catch(NumberFormatException e) {
                 escolhaInvalida = true;
                 continue;
@@ -240,7 +240,7 @@ public class Main {
             }
 
             try {
-                op = Integer .parseInt(opStr);
+                op = Integer.parseInt(opStr);
             } catch(NumberFormatException e) {
                 escolhaInvalida = true;
                 continue;
@@ -279,7 +279,7 @@ public class Main {
             }
 
             try {
-                op = Integer .parseInt(opStr);
+                op = Integer.parseInt(opStr);
             } catch(NumberFormatException e) {
                 escolhaInvalida = true;
                 continue;
@@ -323,7 +323,7 @@ public class Main {
             }
             
             try {
-                op = Integer .parseInt(opStr);
+                op = Integer.parseInt(opStr);
             } catch(NumberFormatException e) {
                 continue;
                 }

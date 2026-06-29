@@ -114,9 +114,9 @@ public class Relatorio {
 
     // converte DD/MM/AAAA pra um numero tipo 20260519 pra poder comparar
     private static Integer converterDataParaNumero(String data) {
-        Integer dia = Integer .parseInt(data.substring(0, 2));
-        Integer mes = Integer .parseInt(data.substring(3, 5));
-        Integer ano = Integer .parseInt(data.substring(6, 10));
+        Integer dia = Integer.parseInt(data.substring(0, 2));
+        Integer mes = Integer.parseInt(data.substring(3, 5));
+        Integer ano = Integer.parseInt(data.substring(6, 10));
         return ano * 10000 + mes * 100 + dia;
     }
 }

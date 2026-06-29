@@ -39,7 +39,7 @@ public final class Entrada {
 
 	public static Integer  integerInput() {
 		try {
-			return Integer .parseInt(input());
+			return Integer.parseInt(input());
 		} catch(NumberFormatException e) {
 			return null;
 		}
@@ -47,7 +47,7 @@ public final class Entrada {
 
 	public static Integer  integerInput(String message) {
 		try {
-			return Integer .parseInt(input(message));
+			return Integer.parseInt(input(message));
 		} catch(NumberFormatException e) {
 			return null;
 		}

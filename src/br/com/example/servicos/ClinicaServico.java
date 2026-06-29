@@ -80,7 +80,7 @@ public class ClinicaServico {
         Integer tipo;
     
         try {
-            tipo = Integer .parseInt(tipoStr);
+            tipo = Integer.parseInt(tipoStr);
         } catch(NumberFormatException e) {
             return;
         }
@@ -127,7 +127,7 @@ public class ClinicaServico {
         }
     
         System.out.print("Vai informar convenio? (1-Nao / 2-Sim): ");
-        Integer tipo = Integer .parseInt(Entrada.input());
+        Integer tipo = Integer.parseInt(Entrada.input());
     
         System.out.print("Data de nascimento: ");
         String dataDeNascimento = Data.validarData(Entrada.input(), sc);
@@ -201,7 +201,7 @@ public class ClinicaServico {
     //     }
     // 
     //     System.out.print("Tipo (1-Minimo / 2-Com registro e valor / 3-Completo): ");
-    //     Integer tipo = Integer .parseInt(Entrada.input());
+    //     Integer tipo = Integer.parseInt(Entrada.input());
     // 
     //     if (tipo == 1) {
     //         profissionais.add(new Profissional(nome, "", esp));
@@ -221,7 +221,7 @@ public class ClinicaServico {
     //         double valor = Double.parseDouble(Entrada.input());
             // 
     //         System.out.print("Quantos dias atende? ");
-    //         Integer qtd = Integer .parseInt(Entrada.input());
+    //         Integer qtd = Integer.parseInt(Entrada.input());
 // 
     //         if (qtd > 7) qtd = 7;
             // 
@@ -248,7 +248,7 @@ public class ClinicaServico {
         }
 
         System.out.print("Vai informar dias? (1-Nao / 2-Sim): ");
-        Integer tipo = Integer .parseInt(Entrada.input());
+        Integer tipo = Integer.parseInt(Entrada.input());
 
         System.out.print("Registro: ");
         String reg = Entrada.input();
@@ -259,7 +259,7 @@ public class ClinicaServico {
             profissionais.get(idx).atualizar(reg, valor);
         } else {
             System.out.print("Quantos dias? ");
-            Integer qtd = Integer .parseInt(Entrada.input());
+            Integer qtd = Integer.parseInt(Entrada.input());
             List<String> dias = new ArrayList<>();
             for (int i = 0; i < qtd; i++) {
                 System.out.print("Dia " + (i+1) + ": ");
@@ -349,7 +349,7 @@ public class ClinicaServico {
             }
             System.out.println("Sugestao: " + sugestao);
             System.out.print("Aceita? (1-Sim / 2-Nao): ");
-            Integer aceita = Integer .parseInt(Entrada.input());
+            Integer aceita = Integer.parseInt(Entrada.input());
             if (aceita == 1) {
                 horario = sugestao;
             } else {
@@ -358,7 +358,7 @@ public class ClinicaServico {
         }
 
         System.out.print("Informar tipo? (1-Nao / 2-Sim): ");
-        Integer infoTipo = Integer .parseInt(Entrada.input());
+        Integer infoTipo = Integer.parseInt(Entrada.input());
 
         if (infoTipo == 1) {
             consultas.set(infoTipo, new Consulta(cpf, nomeProf, data, horario));
@@ -450,8 +450,8 @@ public class ClinicaServico {
         System.out.print("Horario atual (HH:MM): ");
         String horaAtual = Entrada.input();
 
-        Integer hConsulta = Integer .parseInt(horario.substring(0, 2));
-        Integer hAgora = Integer .parseInt(horaAtual.substring(0, 2));
+        Integer hConsulta = Integer.parseInt(horario.substring(0, 2));
+        Integer hAgora = Integer.parseInt(horaAtual.substring(0, 2));
         Integer diff = hConsulta - hAgora;
 
         if (diff < 2) {
@@ -461,7 +461,7 @@ public class ClinicaServico {
         }
 
         System.out.print("Informar motivo? (1-Nao / 2-Sim): ");
-        Integer temMotivo = Integer .parseInt(Entrada.input());
+        Integer temMotivo = Integer.parseInt(Entrada.input());
 
         if (temMotivo == 1) {
             consultas.get(idx).cancelar();
@@ -498,7 +498,7 @@ public class ClinicaServico {
         }
 
         System.out.print("Apenas trocar horario no mesmo dia? (1-Sim / 2-Nao): ");
-        Integer tipo = Integer .parseInt(Entrada.input());
+        Integer tipo = Integer.parseInt(Entrada.input());
 
         String novaData;
         String novoHorario;
@@ -596,9 +596,9 @@ public class ClinicaServico {
     // descobre dia da semana a partir da data
     // operação opcional
     public static String descobrirDiaSemana(String data) {
-        Integer dia = Integer .parseInt(data.substring(0, 2));
-        Integer mes = Integer .parseInt(data.substring(3, 5));
-        Integer ano = Integer .parseInt(data.substring(6, 10));
+        Integer dia = Integer.parseInt(data.substring(0, 2));
+        Integer mes = Integer.parseInt(data.substring(3, 5));
+        Integer ano = Integer.parseInt(data.substring(6, 10));
 
         // ajuste pra formula funcionar com janeiro e fevereiro
         if (mes < 3) {
@@ -623,7 +623,7 @@ public class ClinicaServico {
 
     public static void registrarAtendimento() {
         System.out.print("Indice da consulta: ");
-        Integer idxConsulta = Integer .parseInt(Entrada.input());
+        Integer idxConsulta = Integer.parseInt(Entrada.input());
 
         if (idxConsulta < 0 || idxConsulta >= totalConsultas) {
             System.out.println("Indice invalido.");
@@ -638,7 +638,7 @@ public class ClinicaServico {
         String obs = Entrada.input();
 
         System.out.print("Tipo de registro (1-So obs / 2-Com diagnostico / 3-Completo): ");
-        Integer tipo = Integer .parseInt(Entrada.input());
+        Integer tipo = Integer.parseInt(Entrada.input());
 
         if (tipo == 1) {
             atendimentos.set(totalAtendimentos, new Atendimento(idxConsulta, obs));
@@ -653,7 +653,7 @@ public class ClinicaServico {
             String diag = Entrada.input();
 
             System.out.print("Como informar procedimentos? (1-Um por vez / 2-Todos de uma vez): ");
-            Integer forma = Integer .parseInt(Entrada.input());
+            Integer forma = Integer.parseInt(Entrada.input());
 
             List<String> procs = new ArrayList<>();
             Integer qtdProcs = 0;
@@ -670,7 +670,7 @@ public class ClinicaServico {
                 }
             } else {
                 System.out.print("Quantos? ");
-                qtdProcs = Integer .parseInt(Entrada.input());
+                qtdProcs = Integer.parseInt(Entrada.input());
                 if (qtdProcs > 10) qtdProcs = 10;
                 for (int i = 0; i < qtdProcs; i++) {
                     System.out.print("Proc " + (i+1) + ": ");
@@ -691,7 +691,7 @@ public class ClinicaServico {
 
     public static void pagamentoDireto() {
         System.out.print("Indice da consulta: ");
-        Integer idxConsulta = Integer .parseInt(Entrada.input());
+        Integer idxConsulta = Integer.parseInt(Entrada.input());
 
         if (idxConsulta < 0 || idxConsulta >= totalConsultas) {
             System.out.println("Indice invalido.");
@@ -705,7 +705,7 @@ public class ClinicaServico {
 
         if (tipoPag.equals("cartao")) {
             System.out.print("Parcelas (1 a 3): ");
-            Integer parc = Integer .parseInt(Entrada.input());
+            Integer parc = Integer.parseInt(Entrada.input());
             if (parc < 1) parc = 1;
             if (parc > 3) parc = 3;
             pagamentos.set(totalPagamentos, new PagamentoDinheiro(idxConsulta, valor, tipoPag, parc));
@@ -722,7 +722,7 @@ public class ClinicaServico {
 
     public static void pagamentoAutomatico() {
         System.out.print("Indice da consulta: ");
-        Integer idxConsulta = Integer .parseInt(Entrada.input());
+        Integer idxConsulta = Integer.parseInt(Entrada.input());
 
         if (idxConsulta < 0 || idxConsulta >= totalConsultas) {
             System.out.println("Indice invalido.");
@@ -746,7 +746,7 @@ public class ClinicaServico {
         if (temConvenio) desconto = desconto + 40;
 
         System.out.print("Tem multa pendente? (1-Nao / 2-Sim): ");
-        Integer temMulta = Integer .parseInt(Entrada.input());
+        Integer temMulta = Integer.parseInt(Entrada.input());
         double valorMulta = 0;
 
         double valorFinal;
@@ -772,7 +772,7 @@ public class ClinicaServico {
 
         if (tipoPag.equals("cartao")) {
             System.out.print("Parcelas (1 a 3): ");
-            Integer parc = Integer .parseInt(Entrada.input());
+            Integer parc = Integer.parseInt(Entrada.input());
             if (parc < 1) parc = 1;
             if (parc > 3) parc = 3;
             pagamentos.set(totalPagamentos, new PagamentoDinheiro(idxConsulta, valorFinal, tipoPag, parc));
