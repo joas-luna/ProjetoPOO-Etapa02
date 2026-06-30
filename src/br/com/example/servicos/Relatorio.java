@@ -9,8 +9,8 @@ public class Relatorio {
 
     // mostra todas as consultas
 
-    public static void gerarRelatorio(List<Consulta> consultas, int totalConsultas,
-                                      List<Atendimento> atendimentos, int totalAtendimentos) {
+    public static void gerarRelatorio(List<Consulta> consultas, Integer totalConsultas,
+                                      List<Atendimento> atendimentos, Integer totalAtendimentos) {
         System.out.println("\n=== RELATORIO GERAL ===");
         for (int i = 0; i < totalConsultas; i++) {
             System.out.println(consultas.get(i).exibirResumo());
@@ -25,8 +25,8 @@ public class Relatorio {
 
     // filtra por profissional
 
-    public static void gerarRelatorio(List<Consulta> consultas, int totalConsultas,
-                                      List<Atendimento> atendimentos, int totalAtendimentos,
+    public static void gerarRelatorio(List<Consulta> consultas, Integer totalConsultas,
+                                      List<Atendimento> atendimentos, Integer totalAtendimentos,
                                       String nomeProfissional) {
         System.out.println("\n=== RELATORIO - " + nomeProfissional + " ===");
         boolean achou = false;
@@ -48,8 +48,8 @@ public class Relatorio {
 
     // filtra por periodo (data inicio e fim)
 
-    public static void gerarRelatorio(List<Consulta> consultas, int totalConsultas,
-                                      List<Atendimento> atendimentos, int totalAtendimentos,
+    public static void gerarRelatorio(List<Consulta> consultas, Integer totalConsultas,
+                                      List<Atendimento> atendimentos, Integer totalAtendimentos,
                                       String dataInicio, String dataFim) {
         System.out.println("\n=== RELATORIO - " + dataInicio + " a " + dataFim + " ===");
         for (int i = 0; i < totalConsultas; i++) {
@@ -65,11 +65,11 @@ public class Relatorio {
     }
 
     // resumo financeiro do dia
-    public static void gerarResumoFinanceiro(List<Consulta> consultas, int totalConsultas,
-                                             List<Pagamento> pagamentos, int totalPagamentos,
-                                             List<Double> multas, int totalMultas) {
-        int realizadas = 0;
-        int canceladas = 0;
+    public static void gerarResumoFinanceiro(List<Consulta> consultas, Integer totalConsultas,
+                                             List<Pagamento> pagamentos, Integer totalPagamentos,
+                                             List<Double> multas, Integer totalMultas) {
+        Integer realizadas = 0;
+        Integer canceladas = 0;
         double totalFaturado = 0;
         double totalEmMultas = 0;
 
@@ -95,7 +95,7 @@ public class Relatorio {
 
     // busca diagnostico de um atendimento pelo indice da consulta
    
-    public static String buscarDiagnostico(int indiceConsulta, List<Atendimento> atendimentos, int total) {
+    public static String buscarDiagnostico(Integer indiceConsulta, List<Atendimento> atendimentos, Integer total) {
         for (int i = 0; i < total; i++) {
             if (atendimentos.get(i).getIndiceConsulta() == indiceConsulta) {
                 return atendimentos.get(i).getDiagnostico();
@@ -106,17 +106,17 @@ public class Relatorio {
 
     // compara datas convertendo pra numero inteiro (AAAAMMDD)
     public static boolean estaNoIntervalo(String data, String inicio, String fim) {
-        int valorData = converterDataParaNumero(data);
-        int valorInicio = converterDataParaNumero(inicio);
-        int valorFim = converterDataParaNumero(fim);
+        Integer valorData = converterDataParaNumero(data);
+        Integer valorInicio = converterDataParaNumero(inicio);
+        Integer valorFim = converterDataParaNumero(fim);
         return valorData >= valorInicio && valorData <= valorFim;
     }
 
     // converte DD/MM/AAAA pra um numero tipo 20260519 pra poder comparar
-    private static int converterDataParaNumero(String data) {
-        int dia = Integer.parseInt(data.substring(0, 2));
-        int mes = Integer.parseInt(data.substring(3, 5));
-        int ano = Integer.parseInt(data.substring(6, 10));
+    private static Integer converterDataParaNumero(String data) {
+        Integer dia = Integer.parseInt(data.substring(0, 2));
+        Integer mes = Integer.parseInt(data.substring(3, 5));
+        Integer ano = Integer.parseInt(data.substring(6, 10));
         return ano * 10000 + mes * 100 + dia;
     }
 }

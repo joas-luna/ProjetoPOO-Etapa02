@@ -2,19 +2,19 @@ package br.com.example.servicos.abstratos;
 
 
 public abstract class Pagamento {
-    private int indiceConsulta;
+    private Integer indiceConsulta;
     private double valorFinal;
     private String tipoPagamento;
-    private int parcelas = 1;
+    private Integer parcelas = 1;
 
-    public Pagamento(int indiceConsulta, double valorFinal, String tipoPagamento) {
+    public Pagamento(Integer indiceConsulta, double valorFinal, String tipoPagamento) {
         this.indiceConsulta = indiceConsulta;
         this.valorFinal = valorFinal;
         this.tipoPagamento = tipoPagamento;
     }
 
     // com parcelas (so pra cartao)
-    public Pagamento(int indiceConsulta, double valorFinal, String tipoPagamento, int parcelas) {
+    public Pagamento(Integer indiceConsulta, double valorFinal, String tipoPagamento, Integer parcelas) {
         this(indiceConsulta, valorFinal, tipoPagamento);
         this.parcelas = parcelas;
     }

@@ -7,7 +7,7 @@ import br.com.example.utilitarios.Saida;
 
 public class Main {
     public static void main(String[] args) {
-        int op = -1;
+        Integer op = -1;
         boolean escolhaInvalida = false;
         String opStr;
         
@@ -70,7 +70,7 @@ public class Main {
     }
 
     public static void menuPacientes() {
-        int op = -1;
+        Integer op = -1;
         boolean escolhaInvalida = false;
         String opStr;
         
@@ -117,7 +117,7 @@ public class Main {
     }
 
     public static void menuProfissionais() {
-        int op = -1;
+        Integer op = -1;
         boolean escolhaInvalida = false;
         String opStr;
         
@@ -164,7 +164,7 @@ public class Main {
     }
 
     public static void menuConsultas() {
-        int op = -1;
+        Integer op = -1;
         boolean escolhaInvalida = false;
         String opStr;
         
@@ -215,7 +215,7 @@ public class Main {
     }
 
     public static void menuAtendimentos() {
-        int op = -1;
+        Integer op = -1;
         boolean escolhaInvalida = false;
         String opStr;
         
@@ -252,7 +252,7 @@ public class Main {
     }
 
     public static void menuPagamentos() {
-        int op = -1;
+        Integer op = -1;
         boolean escolhaInvalida = false;
         String opStr;
         
@@ -297,7 +297,7 @@ public class Main {
     }
 
     public static void menuRelatorios() {
-        int op = -1;
+        Integer op = -1;
         boolean escolhaInvalida = false;
         String opStr;
         

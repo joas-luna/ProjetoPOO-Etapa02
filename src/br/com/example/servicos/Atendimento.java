@@ -8,31 +8,31 @@ import br.com.example.dtos.Prontuario;
 
 public class Atendimento implements Atendivel {
 
-    private int indiceConsulta;
+    private Integer indiceConsulta;
     private String observacoes;
     private String diagnostico = "";
     private List<String> procedimentos = new ArrayList<>();
-    private int totalProcedimentos = 0;
+    private Integer totalProcedimentos = 0;
     private Prontuario prontuario;
     private boolean finalizado = false;
 
     // registro basico - so observacoes
-    public Atendimento(int indiceConsulta, String observacoes) {
+    public Atendimento(Integer indiceConsulta, String observacoes) {
         this.indiceConsulta = indiceConsulta;
         this.observacoes = observacoes;
     }
 
-    public Atendimento(int indiceConsulta, String observacoes, String diagnostico) {
+    public Atendimento(Integer indiceConsulta, String observacoes, String diagnostico) {
         this(indiceConsulta, observacoes);
         this.diagnostico = diagnostico;
     }
 
     public Atendimento(
-            int indiceConsulta,
+            Integer indiceConsulta,
             String observacoes,
             String diagnostico,
             List<String> procedimentos,
-            int totalProcedimentos) {
+            Integer totalProcedimentos) {
 
         this(indiceConsulta, observacoes, diagnostico);
 
@@ -43,7 +43,7 @@ public class Atendimento implements Atendivel {
         }
     }
 
-    public int getIndiceConsulta() {
+    public Integer getIndiceConsulta() {
         return indiceConsulta;
     }
 
@@ -59,7 +59,7 @@ public class Atendimento implements Atendivel {
         return procedimentos;
     }
 
-    public int getTotalProcedimentos() {
+    public Integer getTotalProcedimentos() {
         return totalProcedimentos;
     }
 
@@ -92,7 +92,7 @@ public class Atendimento implements Atendivel {
 
     }
 
-    public void adicionarProcedimento(List<String> procs, int quantidade) {
+    public void adicionarProcedimento(List<String> procs, Integer quantidade) {
 
         for (int i = 0; i < quantidade; i++) {
 

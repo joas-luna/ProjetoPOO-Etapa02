@@ -19,7 +19,7 @@ public class AtendimentoServico {
         atendimentos.add(atendimento);
     }
 
-    public Atendimento buscarAtendimento(int indiceConsulta) {
+    public Atendimento buscarAtendimento(Integer indiceConsulta) {
 
         for (Atendimento atendimento : atendimentos) {
 
@@ -33,7 +33,7 @@ public class AtendimentoServico {
 
     }
 
-    public boolean adicionarDiagnostico(int indiceConsulta, String diagnostico) {
+    public boolean adicionarDiagnostico(Integer indiceConsulta, String diagnostico) {
 
         Atendimento atendimento = buscarAtendimento(indiceConsulta);
 
@@ -47,7 +47,7 @@ public class AtendimentoServico {
 
     }
 
-    public boolean adicionarProcedimento(int indiceConsulta, String procedimento) {
+    public boolean adicionarProcedimento(Integer indiceConsulta, String procedimento) {
 
         Atendimento atendimento = buscarAtendimento(indiceConsulta);
 
@@ -61,7 +61,7 @@ public class AtendimentoServico {
 
     }
 
-    public boolean finalizarAtendimento(int indiceConsulta) {
+    public boolean finalizarAtendimento(Integer indiceConsulta) {
 
         Atendimento atendimento = buscarAtendimento(indiceConsulta);
 
