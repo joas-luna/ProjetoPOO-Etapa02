@@ -1,7 +1,5 @@
 package br.com.example;
 
-import java.util.NoSuchElementException;
-
 import br.com.example.servicos.ClinicaServico;
 import br.com.example.utilitarios.Entrada;
 import br.com.example.utilitarios.Saida;
@@ -10,6 +8,9 @@ import br.com.example.utilitarios.Saida;
 public class Main {
     public static void main(String[] args) {
         int op = -1;
+        boolean escolhaInvalida = false;
+        String opStr;
+        
         while (op != 0) {
             Saida.limparTerminal();
 
@@ -23,32 +24,55 @@ public class Main {
             System.out.println("0/Enter - Sair");
             System.out.print("Escolha: ");
 
-            try {
-                op = Integer.parseInt(Entrada.sc.nextLine());
-            } catch(NumberFormatException e) {
-                break;
-            } catch(NoSuchElementException e) {
+            if(escolhaInvalida) {
+                System.out.print(Saida.vermelho("\t\t\tInválido!\r\u001B[10G"));
+                escolhaInvalida = false;
+            }
+
+            
+            opStr = Entrada.removerEspacos(Entrada.confirmar(Entrada.input(), 10));
+
+            if(opStr.equals("")) {
                 break;
             }
-    
+            
+            try {
+                op = Integer.parseInt(opStr);
+            } catch(NumberFormatException e) {
+                escolhaInvalida = true;
+                continue;
+            }
+            
             switch (op) {
                 case 1: menuPacientes(); break;
                 case 2: menuProfissionais(); break;
                 case 3: menuConsultas(); break;
                 case 4: menuAtendimentos(); break;
-                case 5: System.out.println("\n\nInterditado momentaneamente...\n\n\n"); /* menuPagamentos(); */break;
-                case 6: System.out.println("\n\nInterditado momentaneamente...\n\n\n"); /* menuRelatorios(); */break;
+                case 5: menuPagamentos(); break;
+                case 6: menuRelatorios(); break;
                 case 0: break;
-                default: System.out.println("Opção invalida!"); break;
+                default: escolhaInvalida = true; break;
             }
         }
 
-        System.out.println("Sistema encerrado.");
+        Saida.limparTerminal();
+        System.out.println(Saida.ciano("""
+            .___________________________________________________________________________________________.
+            |                                                                                           |
+            |                                                                                           |
+
+            = <-> = <-> = <-> = <-> = <-> = <-> = SISTEMA ENCERRADO = <-> = <-> = <-> = <-> = <-> = <-> =
+            
+            |                                                                                           |
+            |                                                                                           |
+            *-------------------------------------------------------------------------------------------*"""));
         Entrada.sc.close();
     }
 
     public static void menuPacientes() {
         int op = -1;
+        boolean escolhaInvalida = false;
+        String opStr;
         
         while (op != 0) {
             Saida.limparTerminal();
@@ -62,14 +86,24 @@ public class Main {
             System.out.println("0/Enter - Voltar");
             System.out.print("Opcao: ");
             
-            try {
-                op = Integer.parseInt(Entrada.sc.nextLine());
-            } catch(NumberFormatException e) {
-                return;
-            } catch(NoSuchElementException e) {
+            if(escolhaInvalida) {
+                System.out.print(Saida.vermelho("\t\t\tInválido!\r\u001B[8G"));
+                escolhaInvalida = false;
+            }
+
+            opStr = Entrada.removerEspacos(Entrada.input());
+            
+            if(opStr.equals("")) {
                 return;
             }
-    
+
+            try {
+                op = Integer.parseInt(opStr);
+            } catch(NumberFormatException e) {
+                escolhaInvalida = true;
+                continue;
+            }
+
             switch (op) {
                 case 1: ClinicaServico.cadastrarPaciente(); break;
                 case 2: ClinicaServico.complementarPaciente(); break;
@@ -77,13 +111,16 @@ public class Main {
                 case 4: ClinicaServico.listarPacientes(); break;
                 case 5: ClinicaServico.desativarPaciente(); break;
                 case 0: break;
-                default: break;
+                default: escolhaInvalida = true; break;
             }
         }
     }
 
     public static void menuProfissionais() {
         int op = -1;
+        boolean escolhaInvalida = false;
+        String opStr;
+        
         while (op != 0) {
             Saida.limparTerminal();
 
@@ -95,27 +132,42 @@ public class Main {
             System.out.println("0/Enter - Voltar");
             System.out.print("Opcao: ");
             
-            try {
-                op = Integer.parseInt(Entrada.sc.nextLine());
-            } catch(NumberFormatException e) {
-                return;
-            } catch(NoSuchElementException e) {
+            if(escolhaInvalida) {
+                System.out.print(Saida.vermelho("\t\t\tInválido!\r\u001B[8G"));
+            }
+
+            escolhaInvalida = false;
+
+            opStr = Entrada.removerEspacos(Entrada.input());
+
+            if(opStr.equals("")) {
                 return;
             }
 
+            try {
+                op = Integer.parseInt(opStr);
+            } catch(NumberFormatException e) {
+                escolhaInvalida = true;
+                continue;
+            }
+
+
             switch (op) {
-                // case 1: cadastrarProfissional(); break;
+                // case 1: ClinicaServico.cadastrarProfissional(); break;
                 case 2: ClinicaServico.atualizarProfissional(); break;
                 case 3: ClinicaServico.listarProfissionais(); break;
                 case 4: ClinicaServico.filtrarProfissionais(); break;
                 case 0: break;
-                default: break;
+                default: escolhaInvalida = true; break;
             }
         }
     }
 
     public static void menuConsultas() {
         int op = -1;
+        boolean escolhaInvalida = false;
+        String opStr;
+        
         while (op != 0) {
             Saida.limparTerminal();
 
@@ -129,13 +181,25 @@ public class Main {
             System.out.println("0/Enter - Voltar");
             System.out.print("Opcao: ");
             
-            try {
-                op = Integer.parseInt(Entrada.sc.nextLine());
-            } catch(NumberFormatException e) {
-                return;
-            } catch(NoSuchElementException e) {
+            if(escolhaInvalida) {
+                System.out.print(Saida.vermelho("\t\t\tInválido!\r\u001B[8G"));
+            }
+
+            escolhaInvalida = false;
+
+            opStr = Entrada.removerEspacos(Entrada.input());
+
+            if(opStr.equals("")) {
                 return;
             }
+
+            try {
+                op = Integer.parseInt(opStr);
+            } catch(NumberFormatException e) {
+                escolhaInvalida = true;
+                continue;
+            }
+
 
             switch (op) {
                 case 1: ClinicaServico.agendarComProfissional(); break;
@@ -143,15 +207,18 @@ public class Main {
                 case 3: ClinicaServico.cancelarConsulta(); break;
                 case 4: ClinicaServico.remarcarConsulta(); break;
                 case 5: ClinicaServico.listarConsultas(); break;
-                case 6: ClinicaServico.buscarConsultasPorPaciente(); break;
+                case 6: ClinicaServico.buscarConsultasPorPaciente(); return;
                 case 0: break;
-                default: break;
+                default: escolhaInvalida = true; break;
             }
         }
     }
 
     public static void menuAtendimentos() {
         int op = -1;
+        boolean escolhaInvalida = false;
+        String opStr;
+        
         while (op != 0) {
             Saida.limparTerminal();
 
@@ -160,13 +227,25 @@ public class Main {
             System.out.println("0/Enter - Voltar");
             System.out.print("Opcao: ");
             
-            try {
-                op = Integer.parseInt(Entrada.sc.nextLine());
-            } catch(NumberFormatException e) {
-                return;
-            } catch(NoSuchElementException e) {
+            if(escolhaInvalida) {
+                System.out.print(Saida.vermelho("\t\t\tInválido!\r\u001B[8G"));
+            }
+
+            escolhaInvalida = false;
+
+            opStr = Entrada.removerEspacos(Entrada.input());
+
+            if(opStr.equals("")) {
                 return;
             }
+
+            try {
+                op = Integer.parseInt(opStr);
+            } catch(NumberFormatException e) {
+                escolhaInvalida = true;
+                continue;
+            }
+
 
             if (op == 1) ClinicaServico.registrarAtendimento();
         }
@@ -174,6 +253,9 @@ public class Main {
 
     public static void menuPagamentos() {
         int op = -1;
+        boolean escolhaInvalida = false;
+        String opStr;
+        
         while (op != 0) {
             Saida.limparTerminal();
 
@@ -184,26 +266,41 @@ public class Main {
             System.out.println("0/Enter - Voltar");
             System.out.print("Opcao: ");
             
-            try {
-                op = Integer.parseInt(Entrada.sc.nextLine());
-            } catch(NumberFormatException e) {
-                return;
-            } catch(NoSuchElementException e) {
+            if(escolhaInvalida) {
+                System.out.print(Saida.vermelho("\t\t\tInválido!\r\u001B[8G"));
+            }
+
+            escolhaInvalida = false;
+
+            opStr = Entrada.removerEspacos(Entrada.input());
+
+            if(opStr.equals("")) {
                 return;
             }
+
+            try {
+                op = Integer.parseInt(opStr);
+            } catch(NumberFormatException e) {
+                escolhaInvalida = true;
+                continue;
+            }
+
 
             switch (op) {
                 case 1: ClinicaServico.pagamentoDireto(); break;
                 case 2: ClinicaServico.pagamentoAutomatico(); break;
                 case 3: ClinicaServico.listarPagamentos(); break;
                 case 0: break;
-                default: break;
+                default: escolhaInvalida = true; break;
             }
         }
     }
 
     public static void menuRelatorios() {
         int op = -1;
+        boolean escolhaInvalida = false;
+        String opStr;
+        
         while (op != 0) {
             Saida.limparTerminal();
 
@@ -215,15 +312,23 @@ public class Main {
             System.out.println("0/Enter - Voltar");
             System.out.print("Opcao: ");
             
-            try {
-                op = Integer.parseInt(Entrada.sc.nextLine());
-            } catch(NumberFormatException e) {
-                return;
-            } catch(NoSuchElementException e) {
-                return;
+            if(escolhaInvalida) {
+                System.out.print(Saida.vermelho("\t\t\tInválido!\r\u001B[8G"));
             }
 
-            ClinicaServico.gerarRelatorio(op);
+            opStr = Entrada.removerEspacos(Entrada.input());
+
+            if(opStr.equals("")) {
+                return;
+            }
+            
+            try {
+                op = Integer.parseInt(opStr);
+            } catch(NumberFormatException e) {
+                continue;
+                }
+
+            escolhaInvalida = ClinicaServico.gerarRelatorio(op);
         }
     }
-}
+}  

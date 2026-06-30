@@ -7,4 +7,7 @@ public final class Nome {
 		throw new InstanciacaoException("Não pode instanciar ");
 	}
     
+	public static String validarNome(String nome) {
+		return nome;
+	}
 }

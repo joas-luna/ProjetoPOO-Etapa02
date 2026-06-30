@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import br.com.example.utilitarios.Saida;
+import br.com.example.validadores.CPF;
 import br.com.example.dtos.Consulta;
 import br.com.example.dtos.Convenio;
 import br.com.example.entidades.Paciente;
@@ -11,6 +13,7 @@ import br.com.example.entidades.abstratos.Profissional;
 import br.com.example.servicos.abstratos.Pagamento;
 import br.com.example.utilitarios.Entrada;
 import br.com.example.validadores.Data;
+import br.com.example.validadores.Nome;
 
 public class ClinicaServico {
     private static Scanner sc = Entrada.sc;
@@ -37,43 +40,59 @@ public class ClinicaServico {
     // ---- PACIENTES ----
 
     public static void cadastrarPaciente() {
-        System.out.print("Nome: ");
-        String nome = sc.nextLine();
-        
-        System.out.print("CPF: ");
-        String cpf = sc.nextLine();
-    
-        // verifica se ja existe
-        if (buscarIndicePaciente(cpf) != -1) {
-            System.out.println("CPF ja cadastrado!");
+        Saida.limparTerminal();
+
+        String cpf;
+        String nome = Nome.validarNome(Entrada.input("Nome: "));
+
+        if(nome.equals("")) {
             return;
+        }
+        
+        // verifica se ja existe
+        while(true) {
+            cpf = CPF.validarCPF(Entrada.input("CPF: "));
+
+            if(cpf.equals("")) {
+                return;
+            }
+            
+            if(buscarIndicePaciente(cpf) == -1) {
+                break;
+            }
+            
+            Saida.campo("CPF já cadastrado!", 3, 6);
         }
     
         System.out.print("Tipo (1-Minimo / 2-Com idade e tel / 3-Completo): ");
-        int tipo = Integer.parseInt(sc.nextLine());
-        String dataDeNascimento;
+        int tipo = Integer.parseInt(Entrada.input());
     
-        if (tipo == 1) {
-            pacientes.add(new Paciente(nome, cpf));
-        } else if (tipo == 2) {
-            System.out.print("Data de nascimento: ");
-            dataDeNascimento = Data.validarData(sc.nextLine(), sc);
-
-            System.out.print("Telefone: ");
-            String tel = sc.nextLine();
-            
-            pacientes.add(new Paciente(nome, cpf, dataDeNascimento, tel));
-        } else {
-            System.out.print("Data de nascimento: ");
-            dataDeNascimento = Data.validarData(sc.nextLine(), sc);
-            
-            System.out.print("Telefone: ");
-            String tel = sc.nextLine();
-            
-            System.out.print("Convenio: ");
-            Convenio conv = new Convenio(sc.nextLine());
-            
-            pacientes.add(new Paciente(nome, cpf, dataDeNascimento, tel, conv));
+        switch(tipo) {
+            case 1:
+                pacientes.add(new Paciente(nome, cpf));
+                break;
+            case 2:
+                System.out.print("Data de nascimento: ");
+                String dataDeNascimento = Data.validarData(Entrada.input(), sc);
+        
+                System.out.print("Telefone: ");
+                String tel = Entrada.input();
+                
+                pacientes.add(new Paciente(nome, cpf, dataDeNascimento, tel));
+                break;
+            case 3:
+                System.out.print("Data de nascimento: ");
+                dataDeNascimento = Data.validarData(Entrada.input(), sc);
+                
+                System.out.print("Telefone: ");
+                tel = Entrada.input();
+                
+                System.out.print("Convenio: ");
+                Convenio conv = new Convenio(Entrada.input());
+                
+                pacientes.add(new Paciente(nome, cpf, dataDeNascimento, tel, conv));
+                break;
+            default: return;
         }
 
         totalPacientes++;
@@ -82,7 +101,7 @@ public class ClinicaServico {
 
     public static void complementarPaciente() {
         System.out.print("CPF: ");
-        String cpf = sc.nextLine();
+        String cpf = CPF.validarCPF(Entrada.input());
         int idx = buscarIndicePaciente(cpf);
         if (idx == -1) {
             System.out.println("Paciente nao encontrado.");
@@ -90,19 +109,19 @@ public class ClinicaServico {
         }
     
         System.out.print("Vai informar convenio? (1-Nao / 2-Sim): ");
-        int tipo = Integer.parseInt(sc.nextLine());
+        int tipo = Integer.parseInt(Entrada.input());
     
         System.out.print("Data de nascimento: ");
-        String dataDeNascimento = Data.validarData(sc.nextLine(), sc);
+        String dataDeNascimento = Data.validarData(Entrada.input(), sc);
 
         System.out.print("Telefone: ");
-        String tel = sc.nextLine();
+        String tel = Entrada.input();
     
         if (tipo == 1) {
             pacientes.get(idx).complementar(dataDeNascimento, tel);
         } else {
             System.out.print("Convenio: ");
-            Convenio conv = new Convenio(sc.nextLine());
+            Convenio conv = new Convenio(Entrada.input());
 
             pacientes.get(idx).complementar(dataDeNascimento, tel, conv);
         }
@@ -112,7 +131,7 @@ public class ClinicaServico {
 
     public static void buscarPaciente() {
         System.out.print("CPF: ");
-        String cpf = sc.nextLine();
+        String cpf = CPF.validarCPF(Entrada.input());
         int idx = buscarIndicePaciente(cpf);
         if (idx == -1) {
             System.out.println("Paciente nao encontrado.");
@@ -133,7 +152,7 @@ public class ClinicaServico {
 
     public static void desativarPaciente() {
         System.out.print("CPF: ");
-        String cpf = sc.nextLine();
+        String cpf = CPF.validarCPF(Entrada.input());
         int idx = buscarIndicePaciente(cpf);
         if (idx == -1) {
             System.out.println("Paciente nao encontrado.");
@@ -154,9 +173,9 @@ public class ClinicaServico {
 
     // public static void cadastrarProfissional() {
     //     System.out.print("Nome: ");
-    //     String nome = sc.nextLine();
+    //     String nome = Nome.validarNome(Entrada.input("Nome: "));
     //     System.out.print("Especialidade (clinica geral/fisioterapia/psicologia/nutricao): ");
-    //     String esp = sc.nextLine().trim().toLowerCase();
+    //     String esp = Entrada.input().trim().toLowerCase();
     // 
     //     if (!Profissional.especialidadeValida(esp)) {
     //         System.out.println("Especialidade invalida!");
@@ -164,27 +183,27 @@ public class ClinicaServico {
     //     }
     // 
     //     System.out.print("Tipo (1-Minimo / 2-Com registro e valor / 3-Completo): ");
-    //     int tipo = Integer.parseInt(sc.nextLine());
+    //     int tipo = Integer.parseInt(Entrada.input());
     // 
     //     if (tipo == 1) {
     //         profissionais.add(new Profissional(nome, "", esp));
     //     } else if (tipo == 2) {
     //         System.out.print("Registro: ");
-    //         String reg = sc.nextLine();
+    //         String reg = Entrada.input();
 // 
     //         System.out.print("Valor consulta: ");
-    //         double valor = Double.parseDouble(sc.nextLine());
+    //         double valor = Double.parseDouble(Entrada.input());
 // 
     //         profissionais.add(new Profissional(nome, "", esp, valor, reg));
     //     } else {
     //         System.out.print("Registro: ");
-    //         String reg = sc.nextLine();
+    //         String reg = Entrada.input();
 // 
     //         System.out.print("Valor consulta: ");
-    //         double valor = Double.parseDouble(sc.nextLine());
+    //         double valor = Double.parseDouble(Entrada.input());
             // 
     //         System.out.print("Quantos dias atende? ");
-    //         int qtd = Integer.parseInt(sc.nextLine());
+    //         int qtd = Integer.parseInt(Entrada.input());
 // 
     //         if (qtd > 7) qtd = 7;
             // 
@@ -192,7 +211,7 @@ public class ClinicaServico {
             // 
     //         for (int i = 0; i < qtd; i++) {
     //             System.out.print("Dia " + (i+1) + ": ");
-    //             dias[i] = sc.nextLine();
+    //             dias[i] = Entrada.input();
     //         }
             // 
     //         profissionais.add(new Profissional(nome, "", esp, valor, reg, dias, qtd));
@@ -203,7 +222,7 @@ public class ClinicaServico {
 
     public static void atualizarProfissional() {
         System.out.print("Nome do profissional: ");
-        String nome = sc.nextLine();
+        String nome = Nome.validarNome(Entrada.input("Nome: "));
         int idx = buscarIndiceProfissional(nome);
         if (idx == -1) {
             System.out.println("Profissional nao encontrado.");
@@ -211,22 +230,22 @@ public class ClinicaServico {
         }
 
         System.out.print("Vai informar dias? (1-Nao / 2-Sim): ");
-        int tipo = Integer.parseInt(sc.nextLine());
+        int tipo = Integer.parseInt(Entrada.input());
 
         System.out.print("Registro: ");
-        String reg = sc.nextLine();
+        String reg = Entrada.input();
         System.out.print("Valor consulta: ");
-        double valor = Double.parseDouble(sc.nextLine());
+        double valor = Double.parseDouble(Entrada.input());
 
         if (tipo == 1) {
             profissionais.get(idx).atualizar(reg, valor);
         } else {
             System.out.print("Quantos dias? ");
-            int qtd = Integer.parseInt(sc.nextLine());
+            int qtd = Integer.parseInt(Entrada.input());
             List<String> dias = new ArrayList<>();
             for (int i = 0; i < qtd; i++) {
                 System.out.print("Dia " + (i+1) + ": ");
-                dias.set(i, sc.nextLine());
+                dias.set(i, Entrada.input());
             }
             profissionais.get(idx).atualizar(reg, valor, dias, qtd);
         }
@@ -245,7 +264,7 @@ public class ClinicaServico {
 
     public static void filtrarProfissionais() {
         System.out.print("Especialidade: ");
-        String esp = sc.nextLine();
+        String esp = Entrada.input();
         boolean achou = false;
         for (int i = 0; i < totalProfissionais; i++) {
             if (profissionais.get(i).getEspecialidade().equalsIgnoreCase(esp)) {
@@ -267,7 +286,7 @@ public class ClinicaServico {
 
     public static void agendarComProfissional() {
         System.out.print("CPF do paciente: ");
-        String cpf = sc.nextLine();
+        String cpf = CPF.validarCPF(Entrada.input());
         int idxPac = buscarIndicePaciente(cpf);
         if (idxPac == -1) {
             System.out.println("Paciente nao encontrado.");
@@ -279,7 +298,7 @@ public class ClinicaServico {
         }
 
         System.out.print("Nome do profissional: ");
-        String nomeProf = sc.nextLine();
+        String nomeProf = Entrada.input();
         int idxProf = buscarIndiceProfissional(nomeProf);
         if (idxProf == -1) {
             System.out.println("Profissional nao encontrado.");
@@ -291,9 +310,9 @@ public class ClinicaServico {
         }
 
         System.out.print("Data (DD/MM/AAAA): ");
-        String data = sc.nextLine();
+        String data = Entrada.input();
         System.out.print("Horario (HH:MM): ");
-        String horario = sc.nextLine();
+        String horario = Entrada.input();
 
         // verifica dia da semana
         String diaSemana = descobrirDiaSemana(data);
@@ -312,7 +331,7 @@ public class ClinicaServico {
             }
             System.out.println("Sugestao: " + sugestao);
             System.out.print("Aceita? (1-Sim / 2-Nao): ");
-            int aceita = Integer.parseInt(sc.nextLine());
+            int aceita = Integer.parseInt(Entrada.input());
             if (aceita == 1) {
                 horario = sugestao;
             } else {
@@ -321,13 +340,13 @@ public class ClinicaServico {
         }
 
         System.out.print("Informar tipo? (1-Nao / 2-Sim): ");
-        int infoTipo = Integer.parseInt(sc.nextLine());
+        int infoTipo = Integer.parseInt(Entrada.input());
 
         if (infoTipo == 1) {
             consultas.set(infoTipo, new Consulta(cpf, nomeProf, data, horario));
         } else {
             System.out.print("Tipo (inicial/retorno/avaliacao): ");
-            String tipo = sc.nextLine();
+            String tipo = Entrada.input();
             consultas.set(infoTipo, new Consulta(cpf, nomeProf, data, horario, tipo));
         }
         totalConsultas++;
@@ -336,7 +355,7 @@ public class ClinicaServico {
 
     public static void agendarPorEspecialidade() {
         System.out.print("CPF do paciente: ");
-        String cpf = sc.nextLine();
+        String cpf = CPF.validarCPF(Entrada.input());
         int idxPac = buscarIndicePaciente(cpf);
         if (idxPac == -1) {
             System.out.println("Paciente nao encontrado.");
@@ -348,11 +367,11 @@ public class ClinicaServico {
         }
 
         System.out.print("Especialidade: ");
-        String esp = sc.nextLine();
+        String esp = Entrada.input();
         System.out.print("Data (DD/MM/AAAA): ");
-        String data = sc.nextLine();
+        String data = Entrada.input();
         System.out.print("Horario (HH:MM): ");
-        String horario = sc.nextLine();
+        String horario = Entrada.input();
 
         String diaSemana = descobrirDiaSemana(data);
 
@@ -380,11 +399,11 @@ public class ClinicaServico {
 
     public static void cancelarConsulta() {
         System.out.print("CPF: ");
-        String cpf = sc.nextLine();
+        String cpf = CPF.validarCPF(Entrada.input());
         System.out.print("Data (DD/MM/AAAA): ");
-        String data = sc.nextLine();
+        String data = Entrada.input();
         System.out.print("Horario (HH:MM): ");
-        String horario = sc.nextLine();
+        String horario = Entrada.input();
 
         // localiza a consulta
         int idx = -1;
@@ -411,7 +430,7 @@ public class ClinicaServico {
 
         // calculo da multa
         System.out.print("Horario atual (HH:MM): ");
-        String horaAtual = sc.nextLine();
+        String horaAtual = Entrada.input();
 
         int hConsulta = Integer.parseInt(horario.substring(0, 2));
         int hAgora = Integer.parseInt(horaAtual.substring(0, 2));
@@ -424,13 +443,13 @@ public class ClinicaServico {
         }
 
         System.out.print("Informar motivo? (1-Nao / 2-Sim): ");
-        int temMotivo = Integer.parseInt(sc.nextLine());
+        int temMotivo = Integer.parseInt(Entrada.input());
 
         if (temMotivo == 1) {
             consultas.get(idx).cancelar();
         } else {
             System.out.print("Motivo: ");
-            String motivo = sc.nextLine();
+            String motivo = Entrada.input();
             String msg = consultas.get(idx).cancelar(motivo);
             System.out.println(msg);
         }
@@ -439,11 +458,11 @@ public class ClinicaServico {
 
     public static void remarcarConsulta() {
         System.out.print("CPF: ");
-        String cpf = sc.nextLine();
+        String cpf = CPF.validarCPF(Entrada.input());
         System.out.print("Data original (DD/MM/AAAA): ");
-        String dataOrig = sc.nextLine();
+        String dataOrig = Entrada.input();
         System.out.print("Horario original (HH:MM): ");
-        String horarioOrig = sc.nextLine();
+        String horarioOrig = Entrada.input();
 
         int idx = -1;
         for (int i = 0; i < totalConsultas; i++) {
@@ -461,7 +480,7 @@ public class ClinicaServico {
         }
 
         System.out.print("Apenas trocar horario no mesmo dia? (1-Sim / 2-Nao): ");
-        int tipo = Integer.parseInt(sc.nextLine());
+        int tipo = Integer.parseInt(Entrada.input());
 
         String novaData;
         String novoHorario;
@@ -469,12 +488,12 @@ public class ClinicaServico {
         if (tipo == 1) {
             novaData = dataOrig;
             System.out.print("Novo horario: ");
-            novoHorario = sc.nextLine();
+            novoHorario = Entrada.input();
         } else {
             System.out.print("Nova data (DD/MM/AAAA): ");
-            novaData = sc.nextLine();
+            novaData = Entrada.input();
             System.out.print("Novo horario (HH:MM): ");
-            novoHorario = sc.nextLine();
+            novoHorario = Entrada.input();
         }
 
         String nomeProf = consultas.get(idx).getNomeDoProfissional();
@@ -516,7 +535,7 @@ public class ClinicaServico {
 
     public static void buscarConsultasPorPaciente() {
         System.out.print("CPF: ");
-        String cpf = sc.nextLine();
+        String cpf = CPF.validarCPF(Entrada.input());
         boolean achou = false;
         for (int i = 0; i < totalConsultas; i++) {
             if (consultas.get(i).getCPF().equals(cpf)) {
@@ -586,7 +605,7 @@ public class ClinicaServico {
 
     public static void registrarAtendimento() {
         System.out.print("Indice da consulta: ");
-        int idxConsulta = Integer.parseInt(sc.nextLine());
+        int idxConsulta = Integer.parseInt(Entrada.input());
 
         if (idxConsulta < 0 || idxConsulta >= totalConsultas) {
             System.out.println("Indice invalido.");
@@ -598,25 +617,25 @@ public class ClinicaServico {
         }
 
         System.out.print("Observacoes: ");
-        String obs = sc.nextLine();
+        String obs = Entrada.input();
 
         System.out.print("Tipo de registro (1-So obs / 2-Com diagnostico / 3-Completo): ");
-        int tipo = Integer.parseInt(sc.nextLine());
+        int tipo = Integer.parseInt(Entrada.input());
 
         if (tipo == 1) {
             atendimentos.set(totalAtendimentos, new Atendimento(idxConsulta, obs));
 
         } else if (tipo == 2) {
             System.out.print("Diagnostico: ");
-            String diag = sc.nextLine();
+            String diag = Entrada.input();
             atendimentos.set(totalAtendimentos, new Atendimento(idxConsulta, obs, diag));
 
         } else {
             System.out.print("Diagnostico: ");
-            String diag = sc.nextLine();
+            String diag = Entrada.input();
 
             System.out.print("Como informar procedimentos? (1-Um por vez / 2-Todos de uma vez): ");
-            int forma = Integer.parseInt(sc.nextLine());
+            int forma = Integer.parseInt(Entrada.input());
 
             List<String> procs = new ArrayList<>();
             int qtdProcs = 0;
@@ -625,7 +644,7 @@ public class ClinicaServico {
                 String proc = "";
                 while (!proc.equals("fim") && qtdProcs < 10) {
                     System.out.print("Procedimento (ou 'fim'): ");
-                    proc = sc.nextLine();
+                    proc = Entrada.input();
                     if (!proc.equals("fim")) {
                         procs.set(qtdProcs, proc);
                         qtdProcs++;
@@ -633,11 +652,11 @@ public class ClinicaServico {
                 }
             } else {
                 System.out.print("Quantos? ");
-                qtdProcs = Integer.parseInt(sc.nextLine());
+                qtdProcs = Integer.parseInt(Entrada.input());
                 if (qtdProcs > 10) qtdProcs = 10;
                 for (int i = 0; i < qtdProcs; i++) {
                     System.out.print("Proc " + (i+1) + ": ");
-                    procs.set(i, sc.nextLine());
+                    procs.set(i, Entrada.input());
                 }
             }
             atendimentos.set(totalAtendimentos, new Atendimento(idxConsulta, obs, diag, procs, qtdProcs));
@@ -654,7 +673,7 @@ public class ClinicaServico {
 
     public static void pagamentoDireto() {
         System.out.print("Indice da consulta: ");
-        int idxConsulta = Integer.parseInt(sc.nextLine());
+        int idxConsulta = Integer.parseInt(Entrada.input());
 
         if (idxConsulta < 0 || idxConsulta >= totalConsultas) {
             System.out.println("Indice invalido.");
@@ -662,13 +681,13 @@ public class ClinicaServico {
         }
 
         System.out.print("Valor: ");
-        double valor = Double.parseDouble(sc.nextLine());
+        double valor = Double.parseDouble(Entrada.input());
         System.out.print("Tipo (dinheiro/cartao/convenio): ");
-        String tipoPag = sc.nextLine();
+        String tipoPag = Entrada.input();
 
         if (tipoPag.equals("cartao")) {
             System.out.print("Parcelas (1 a 3): ");
-            int parc = Integer.parseInt(sc.nextLine());
+            int parc = Integer.parseInt(Entrada.input());
             if (parc < 1) parc = 1;
             if (parc > 3) parc = 3;
             pagamentos.set(totalPagamentos, new PagamentoDinheiro(idxConsulta, valor, tipoPag, parc));
@@ -685,7 +704,7 @@ public class ClinicaServico {
 
     public static void pagamentoAutomatico() {
         System.out.print("Indice da consulta: ");
-        int idxConsulta = Integer.parseInt(sc.nextLine());
+        int idxConsulta = Integer.parseInt(Entrada.input());
 
         if (idxConsulta < 0 || idxConsulta >= totalConsultas) {
             System.out.println("Indice invalido.");
@@ -709,7 +728,7 @@ public class ClinicaServico {
         if (temConvenio) desconto = desconto + 40;
 
         System.out.print("Tem multa pendente? (1-Nao / 2-Sim): ");
-        int temMulta = Integer.parseInt(sc.nextLine());
+        int temMulta = Integer.parseInt(Entrada.input());
         double valorMulta = 0;
 
         double valorFinal;
@@ -719,7 +738,7 @@ public class ClinicaServico {
             valorFinal = Pagamento.calcularValor(valorBase, desconto);
         } else {
             System.out.print("Valor da multa: ");
-            valorMulta = Double.parseDouble(sc.nextLine());
+            valorMulta = Double.parseDouble(Entrada.input());
             valorFinal = Pagamento.calcularValor(valorBase, desconto, valorMulta);
         }
 
@@ -731,11 +750,11 @@ public class ClinicaServico {
         System.out.println("Valor final: R$" + vlrFinalArredondado);
 
         System.out.print("Tipo (dinheiro/cartao/convenio): ");
-        String tipoPag = sc.nextLine();
+        String tipoPag = Entrada.input();
 
         if (tipoPag.equals("cartao")) {
             System.out.print("Parcelas (1 a 3): ");
-            int parc = Integer.parseInt(sc.nextLine());
+            int parc = Integer.parseInt(Entrada.input());
             if (parc < 1) parc = 1;
             if (parc > 3) parc = 3;
             pagamentos.set(totalPagamentos, new PagamentoDinheiro(idxConsulta, valorFinal, tipoPag, parc));
@@ -760,28 +779,30 @@ public class ClinicaServico {
 
     // ---- RELATORIOS ----
 
-    public static void gerarRelatorio(int opcao) {
+    public static boolean gerarRelatorio(int opcao) {
         switch (opcao) {
             case 1:
                 Relatorio.gerarRelatorio(consultas, totalConsultas, atendimentos, totalAtendimentos);
                 break;
             case 2:
                 System.out.print("Nome do profissional: ");
-                String nome = sc.nextLine();
+                String nome = Nome.validarNome(Entrada.input("Nome: "));
                 Relatorio.gerarRelatorio(consultas, totalConsultas, atendimentos, totalAtendimentos, nome);
                 break;
             case 3:
                 System.out.print("Data inicio (DD/MM/AAAA): ");
-                String ini = sc.nextLine();
+                String ini = Entrada.input();
                 System.out.print("Data fim (DD/MM/AAAA): ");
-                String fim = sc.nextLine();
+                String fim = Entrada.input();
                 Relatorio.gerarRelatorio(consultas, totalConsultas, atendimentos, totalAtendimentos, ini, fim);
                 break;
             case 4:
                 Relatorio.gerarResumoFinanceiro(consultas, totalConsultas, pagamentos, totalPagamentos, multas, totalMultas);
                 break;
             case 0: break;
-            default: System.out.println("Opcao invalida!"); break;
+            default: return true;
         }
+
+        return false;
     }
 }
