@@ -14,6 +14,7 @@ import br.com.example.servicos.abstratos.Pagamento;
 import br.com.example.utilitarios.Entrada;
 import br.com.example.validadores.Data;
 import br.com.example.validadores.Nome;
+import br.com.example.validadores.Telefone;
 
 public class ClinicaServico {
     private static Scanner sc = Entrada.sc;
@@ -42,79 +43,102 @@ public class ClinicaServico {
     public static void cadastrarPaciente() {
         Saida.limparTerminal();
 
-        String cpf;
         String nome = Nome.validarNome(Entrada.input("Nome: "));
 
         if(nome.equals("")) {
             return;
         }
         
+        String cpf = CPF.validarCPF(Entrada.input("CPF: "));
+        
         // verifica se ja existe
-        while(true) {
-            cpf = CPF.validarCPF(Entrada.input("CPF: "));
-
-            if(cpf.equals("")) {
-                return;
-            }
+        while(buscarIndicePaciente(cpf) != -1) {
+            Saida.limparLinhaAnterior();
             
-            if(buscarIndicePaciente(cpf) == -1) {
-                break;
-            }
-            
-            Saida.campo("CPF já cadastrado!", 3, 6);
+            Saida.campo("CPF: ", "CPF já cadastrado!", 5);
+            cpf = CPF.validarCPF(Entrada.input());
+        }
+        
+        if(cpf.equals("")) {
+            return;
         }
 
-        String tipoStr = Entrada.input(
+        Integer tipo = -1;
+        String tipoStr = "";
+
+        tipoStr = Entrada.input(
             """
-            Tipo 
-            | 1-Minimo
-            | 2-Com idade e tel
-            | 3-Completo
-            : """
+            Escolha se você quer prosseguir com o cadastro.
+            | 1-Concluir por enquanto.
+            | 2-Adicionar data de nascimento e número de telefone.
+            | 3-Complementar tudo.
+            :"""
         );
 
-        if(tipoStr.equals("")) {
-            return;
-        }
+        tipoStr = Entrada.confirmar(tipoStr, 2);
 
-        Integer tipo;
+        while(tipo.equals(-1)) {
+            while(tipo.equals(-1)) {
+                if(tipoStr.equals("")) {
+                    return;
+                }
+
+                if(tipoStr.equals("-1")) {
+                    tipoStr = "error";
+                }
     
-        try {
-            tipo = Integer.parseInt(tipoStr);
-        } catch(NumberFormatException e) {
-            return;
-        }
+                try {
+                    tipo = Integer.parseInt(tipoStr);
+                } catch(NumberFormatException e) {
+                    Saida.linhaAnterior();
+                    Saida.coluna(2);
+                    Saida.limparDireitaLinha();
+                    Saida.campo("Inválido!", 5, 2);
+                    tipoStr = Entrada.confirmar(Entrada.input(), 2);
+                }
+            }
     
-        switch(tipo) {
-            case 1:
-                pacientes.add(new Paciente(nome, cpf));
-                break;
-            case 2:
-                System.out.print("Data de nascimento: ");
-                String dataDeNascimento = Data.validarData(Entrada.input(), sc);
-        
-                System.out.print("Telefone: ");
-                String tel = Entrada.input();
-                
-                pacientes.add(new Paciente(nome, cpf, dataDeNascimento, tel));
-                break;
-            case 3:
-                System.out.print("Data de nascimento: ");
-                dataDeNascimento = Data.validarData(Entrada.input(), sc);
-                
-                System.out.print("Telefone: ");
-                tel = Entrada.input();
-                
-                System.out.print("Convenio: ");
-                Convenio conv = new Convenio(Entrada.input());
-                
-                pacientes.add(new Paciente(nome, cpf, dataDeNascimento, tel, conv));
-                break;
-            default: return;
+            switch(tipo) {
+                case 1:
+                    pacientes.add(new Paciente(nome, cpf));
+                    break;
+                case 2:
+                    System.out.print("Data de nascimento: ");
+                    String dataDeNascimento = Data.validarData(Entrada.input());
+    
+                    if(dataDeNascimento.equals("")) {
+                        return;
+                    }
+            
+                    System.out.print("Telefone: ");
+                    String tel = Telefone.validarTelefone(Entrada.input());
+    
+                    if(tel.equals("")) {
+                        return;
+                    }
+                    
+                    pacientes.add(new Paciente(nome, cpf, dataDeNascimento, tel));
+                    break;
+                case 3:
+                    System.out.print("Data de nascimento: ");
+                    dataDeNascimento = Data.validarData(Entrada.input());
+                    
+                    System.out.print("Telefone: ");
+                    tel = Entrada.input();
+                    
+                    System.out.print("Convenio: ");
+                    Convenio conv = new Convenio(Entrada.input());
+                    
+                    pacientes.add(new Paciente(nome, cpf, dataDeNascimento, tel, conv));
+                    break;
+                default: tipo = -1; tipoStr = "error"; break;
+            } 
         }
 
         totalPacientes++;
+        Saida.limparTerminal();
         System.out.println(Saida.verde("Paciente cadastrado com sucesso!"));
+        Entrada.input();
     }
 
     public static void complementarPaciente() {
@@ -130,7 +154,7 @@ public class ClinicaServico {
         Integer tipo = Integer.parseInt(Entrada.input());
     
         System.out.print("Data de nascimento: ");
-        String dataDeNascimento = Data.validarData(Entrada.input(), sc);
+        String dataDeNascimento = Data.validarData(Entrada.input());
 
         System.out.print("Telefone: ");
         String tel = Entrada.input();
@@ -159,13 +183,41 @@ public class ClinicaServico {
     }
 
     public static void listarPacientes() {
+        Saida.limparTerminal();
+
         if (totalPacientes == 0) {
-            System.out.println("Nenhum paciente cadastrado.");
+            System.out.println(Saida.amarelo("Nenhum paciente cadastrado."));
+            Entrada.input();
             return;
         }
+
+        Integer lenNome = 4;
+        Integer lenNomeConvenio = 8;
+
         for (int i = 0; i < totalPacientes; i++) {
-            System.out.println(pacientes.get(i).exibirResumo());
+            if(lenNome < pacientes.get(i).getNome().length()) {
+                lenNome = pacientes.get(i).getNome().length();
+            }
+
+            if(pacientes.get(i).getConvenio() == null) {
+                continue;
+            }
+
+            if(lenNomeConvenio < pacientes.get(i).getConvenio().getNome().length()) {
+                lenNomeConvenio = pacientes.get(i).getConvenio().getNome().length();
+            }
         }
+
+        System.out.println(
+            "NOME" + Saida.espacos(lenNome - 4) + " | " 
+            + "     CPF       | DATA DE NASCIMENTO |    TELEFONE     | CONVÊNIO" 
+            + Saida.espacos(lenNomeConvenio - 8) + " | " + "ATIVO"
+        );
+        for (int i = 0; i < totalPacientes; i++) {
+            System.out.println(pacientes.get(i).exibirResumo(lenNome, lenNomeConvenio));
+        }
+
+        Entrada.input();
     }
 
     public static void desativarPaciente() {

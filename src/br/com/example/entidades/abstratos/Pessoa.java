@@ -2,15 +2,9 @@ package br.com.example.entidades.abstratos;
 
 
 public abstract class Pessoa {
-    private String nome;
-    private String cpf;
-    /**
-     * Número de telefone pode ser acessado pelas subclasses.
-     */
+    protected String nome;
+    protected String cpf;
     protected String telefone;
-    /**
-     * Data de nascimento pode ser acessado pelas subclasses.
-     */
     protected String dataDeNascimento;
 
     public Pessoa(String nome, String cpf) {

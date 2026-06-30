@@ -29,13 +29,12 @@ public class Main {
                 escolhaInvalida = false;
             }
 
-            
-            opStr = Entrada.removerEspacos(Entrada.confirmar(Entrada.input(), 10));
+            opStr = Entrada.confirmar(Entrada.input(), 10, 3);
 
             if(opStr.equals("")) {
                 break;
             }
-            
+
             try {
                 op = Integer.parseInt(opStr);
             } catch(NumberFormatException e) {
@@ -91,7 +90,7 @@ public class Main {
                 escolhaInvalida = false;
             }
 
-            opStr = Entrada.removerEspacos(Entrada.input());
+            opStr = Entrada.input();
             
             if(opStr.equals("")) {
                 return;
@@ -138,7 +137,7 @@ public class Main {
 
             escolhaInvalida = false;
 
-            opStr = Entrada.removerEspacos(Entrada.input());
+            opStr = Entrada.input();
 
             if(opStr.equals("")) {
                 return;
@@ -187,7 +186,7 @@ public class Main {
 
             escolhaInvalida = false;
 
-            opStr = Entrada.removerEspacos(Entrada.input());
+            opStr = Entrada.input();
 
             if(opStr.equals("")) {
                 return;
@@ -233,7 +232,7 @@ public class Main {
 
             escolhaInvalida = false;
 
-            opStr = Entrada.removerEspacos(Entrada.input());
+            opStr = Entrada.input();
 
             if(opStr.equals("")) {
                 return;
@@ -272,7 +271,7 @@ public class Main {
 
             escolhaInvalida = false;
 
-            opStr = Entrada.removerEspacos(Entrada.input());
+            opStr = Entrada.input();
 
             if(opStr.equals("")) {
                 return;
@@ -316,7 +315,7 @@ public class Main {
                 System.out.print(Saida.vermelho("\t\t\tInválido!\r\u001B[8G"));
             }
 
-            opStr = Entrada.removerEspacos(Entrada.input());
+            opStr = Entrada.input();
 
             if(opStr.equals("")) {
                 return;
@@ -325,8 +324,9 @@ public class Main {
             try {
                 op = Integer.parseInt(opStr);
             } catch(NumberFormatException e) {
+                escolhaInvalida = true;
                 continue;
-                }
+            }
 
             escolhaInvalida = ClinicaServico.gerarRelatorio(op);
         }

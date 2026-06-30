@@ -2,6 +2,7 @@ package br.com.example.entidades;
 
 import br.com.example.dtos.Convenio;
 import br.com.example.entidades.abstratos.Pessoa;
+import br.com.example.utilitarios.Saida;
 
 
 public class Paciente extends Pessoa {
@@ -49,13 +50,47 @@ public class Paciente extends Pessoa {
         this.convenio = convenio;
     }
 
+    @Override
     public String exibirResumo() {
         String status = "Sim";
         if (!ativo) {
             status = "Nao";
         }
-        return "Nome: " + getNome() +" CPF: " + getCpf() + " | Data de nascimento: " + dataDeNascimento
-                + " | Tel: " + telefone + " | Convenio: " + convenio
-                + " | Ativo: " + status;
+        return Saida.verde(nome) + " | " 
+        + Saida.vermelho("CPF: " + getCpf()) + " | " 
+        + Saida.ciano("Data de nascimento: " + dataDeNascimento) + " | " 
+        + Saida.roxo("Tel: " + telefone) + " | " 
+        + Saida.amarelo("Convenio: " + convenio) + " | " 
+        + status;
+    }
+
+    public String exibirResumo(Integer lenNome, Integer lenNomeConvenio) {
+        String status = "Sim";
+        String nomeConvenio = "Nenhum";
+        Integer lenNumero = 4;
+        Integer lenDataDeNascimento = 4;
+
+        if (!ativo) {
+            status = "Nao";
+        }    
+
+        if(convenio != null) {
+            nomeConvenio = convenio.getNome();
+        }
+
+        if(telefone != null) {
+            lenNumero = 15;
+        }
+
+        if(dataDeNascimento != null) {
+            lenDataDeNascimento = 10;
+        }
+
+        return Saida.verde(nome) + Saida.espacos(lenNome - nome.length()) + " | " 
+        + Saida.vermelho(cpf) + " | " 
+        + Saida.ciano(dataDeNascimento) + Saida.espacos(18 - lenDataDeNascimento) + " | " 
+        + Saida.roxo(telefone) +  Saida.espacos(15 - lenNumero) + " | " 
+        + Saida.amarelo(nomeConvenio) + Saida.espacos(lenNomeConvenio - nomeConvenio.length()) + " | " 
+        + status;
     }
 }

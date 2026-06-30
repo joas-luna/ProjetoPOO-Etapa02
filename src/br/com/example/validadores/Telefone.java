@@ -6,5 +6,8 @@ public final class Telefone {
 	private Telefone() throws InstanciacaoException {
 		throw new InstanciacaoException("Não pode instanciar ");
 	}
-    
+
+	public static String validarTelefone(String tel) {
+		return tel;
+	}
 }
